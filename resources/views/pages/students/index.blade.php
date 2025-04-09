@@ -107,8 +107,21 @@
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">
-                    Formulaire à créer
-                    <!-- @todo A compléter -->
+                    <form>
+                        <label>
+                            <input type="text" name="prenom" placeholder="Prénom">
+                        </label><br><br>
+
+                        <label>
+                            <input type="text" name="nom" placeholder="Nom">
+                        </label><br><br>
+
+                        <label>
+                            <input type="date" name="date_naissance" placeholder="Date de naissance">
+                        </label><br><br>
+
+                        <button type="submit">Envoyer</button>
+                    </form>
                 </div>
             </div>
         </div>
