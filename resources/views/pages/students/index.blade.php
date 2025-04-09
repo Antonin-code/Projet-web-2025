@@ -1,4 +1,10 @@
 <x-app-layout>
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <x-slot name="header">
         <h1 class="flex items-center gap-1 text-sm font-normal">
             <span class="text-gray-700">
@@ -107,17 +113,22 @@
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">
-                    <form>
+                    <form method="post" action ="{{route('student.store')}}">
+                        @csrf
                         <label>
-                            <input type="text" name="prenom" placeholder="Prénom">
+                            <input type="text" name="first_name" placeholder="Prénom">
                         </label><br><br>
 
                         <label>
-                            <input type="text" name="nom" placeholder="Nom">
+                            <input type="text" name="last_name" placeholder="Nom">
                         </label><br><br>
 
                         <label>
-                            <input type="date" name="date_naissance" placeholder="Date de naissance">
+                            <input type="text" name="email" placeholder="Email">
+                        </label><br><br>
+
+                        <label>
+                            <input type="date" name="birth_date" placeholder="Date de naissance">
                         </label><br><br>
 
                         <button type="submit">Envoyer</button>
