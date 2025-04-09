@@ -81,4 +81,5 @@ class User extends Authenticatable
             ->withPivot('role')
             ->first();
     }
+
 }
