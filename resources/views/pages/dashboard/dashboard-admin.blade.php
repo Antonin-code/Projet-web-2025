@@ -14,25 +14,12 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            Block 1
-                            <BR> Groupes :
+                           Nombre d'enseignant :<h1> {{ $nombreEnseignants  }}</h1>
                         </h3>
                     </div>
                     <div class="card-body flex flex-col gap-5">
 
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="lg:col-span-1">
-            <div class="card card-grid h-full min-w-full">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        Block 2
-                        <BR> Promotions
-                    </h3>
-                </div>
-                <div class="card-body flex flex-col gap-5">
                 </div>
             </div>
         </div>
@@ -45,23 +32,12 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <BR>Teacher :  <p class="card-text">{{ $teacherCount }}</p>
+                            Nombre d'étudiants : <h1>{{ $nombreEtudiants }}</h1>
                         </h3>
                     </div>
                     <div class="card-body flex flex-col gap-5">
 
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="lg:col-span-1">
-            <div class="card card-grid h-full min-w-full">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        Block 2
-                    </h3>
-                </div>
-                <div class="card-body flex flex-col gap-5">
                 </div>
             </div>
         </div>
@@ -73,7 +49,7 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <BR>Students : <p class="card-text">{{ $studentCount }}</p>
+                            Nombre de Groupes : <h1>{{ $nombreGroups  }}</h1> href
                         </h3>
                     </div>
                     <div class="card-body flex flex-col gap-5">
@@ -82,14 +58,20 @@
                 </div>
             </div>
         </div>
-        <div class="lg:col-span-1">
-            <div class="card card-grid h-full min-w-full">
-                <div class="card-header">
-                    <h3 class="card-title">
-                        Block 2
-                    </h3>
-                </div>
-                <div class="card-body flex flex-col gap-5">
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-5 lg:gap-7.5 items-stretch">
+        <div class="lg:col-span-2">
+            <div class="grid">
+                <div class="card card-grid h-full min-w-full">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            Nombre de Promotions: <h1>{{ $nombrePromotions  }}</h1>
+                        </h3>
+                    </div>
+                    <div class="card-body flex flex-col gap-5">
+
+                    </div>
                 </div>
             </div>
         </div>

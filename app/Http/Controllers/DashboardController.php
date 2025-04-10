@@ -2,22 +2,36 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Student;
-use App\Models\Teacher;
 use Illuminate\Http\Request;
-use App\Models\School;
+use App\Models\UserSchool;
+use App\Models\Cohort;
+use App\Models\Groups;
 
 class DashboardController extends Controller
 {
     public function index() {
+        $user = auth()->user();
         $userRole = auth()->user()->school()->pivot->role;
-        $teacherCount = teacher::all()->count();
-        $studentCount = Student::all()->count();
-        return view('pages.dashboard.dashboard-' . $userRole , ['teacherCount' => $teacherCount], ['studentCount' => $studentCount]);
+
+        // On récupère le nombre d'étudiants/d'enseignant/promotions/groupes seulement si on est admin ou teacher
+        $nombreEtudiants = null;
+        $nombreEnseignants = null;
+        $nombrePromotions = null;
+        $nombreGroups = null;
+
+
+        if (in_array($userRole, ['admin', 'teacher'])) {
+            $nombreEtudiants = UserSchool::where('role', 'student')->count();
+            $nombreEnseignants = UserSchool::where('role', 'teacher')->count();
+            $nombrePromotions = Cohort::count();
+            $nombreGroups = Groups::count();
+        }
+
+        return view('pages.dashboard.dashboard-' . $userRole, compact(
+            'nombreEtudiants',
+            'nombreEnseignants',
+            'nombrePromotions',
+            'nombreGroups'
+        ));
     }
-
-
-
-
-
 }
