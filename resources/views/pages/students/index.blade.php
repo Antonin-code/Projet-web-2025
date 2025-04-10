@@ -49,15 +49,17 @@
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
+                                        <th class="min-w-[135px]">
+                                            <span class="sort">
+                                                <span class="sort-label">Email</span>
+                                                <span class="sort-icon"></span>
+                                            </span>
+                                        </th>
                                         <th class="w-[70px]"></th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Doe</td>
-                                            <td>John</td>
-                                            <td>12/02/2000</td>
-                                            <td>
                                                 <div class="flex items-center justify-between">
                                                     <a href="#">
                                                         <i class="text-success ki-filled ki-shield-tick"></i>
@@ -71,15 +73,16 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>Joe</td>
-                                            <td>Dohn</td>
-                                            <td>02/12/2000</td>
-
                                         @foreach ($students as $student)
                                             <tr>
                                                 <td>{{ $student->user()->last_name }}</td>
                                                 <td>{{ $student->user()->first_name }}</td>
                                                 <td>{{ $student->user()->birth_date }}</td>
+                                                <td>{{ $student->user()->email }}</td>
+                                                <div class="flex items-right justify-between">
+                                                    <td><button  type="submit">Modifier  </button></td>
+                                                <td><button type="submit">Supprimer</button></td>
+                                                </div>
                                             </tr>
                                         @endforeach
 
