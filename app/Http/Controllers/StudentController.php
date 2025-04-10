@@ -39,10 +39,12 @@ class StudentController extends Controller
         return view('pages.students.index', compact('students'));
     }
 
-    public function destroy($students)
+    public function destroy($id)
     {
-        $students = User::findOrFail($students);
+        $students = User::findOrFail($id);
         $students->delete();
-        return redirect()->route('student.index')->with('success', 'Étudiant supprimé avec succès.');
+        $students = UserSchool::findOrFail($id);
+        $students->delete();
+        return redirect()->route('student.index')->with('Étudiant supprimé avec succès.');
     }
 }
