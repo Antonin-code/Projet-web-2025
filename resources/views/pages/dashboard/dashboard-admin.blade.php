@@ -14,12 +14,13 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <a href="{{ route('teacher.index') }}">Nombre de Professeurs :</a>
-                            <h1>{{  $nombreEnseignants }}</h1>
+                            <p>
+                                Nombre de Professeurs : {{ $teacherNumber }}
+                            </p>
                         </h3>
+                        <a href="{{ route('teacher.index') }}" class="link">Y aller !</a>
                     </div>
                     <div class="card-body flex flex-col gap-5">
-
                     </div>
                 </div>
             </div>
@@ -33,9 +34,9 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <a href="{{ route('student.index') }}">Nombre d'étudiants :</a>
-                             <h1>{{ $nombreEtudiants }}</h1>
+                            <p>   Nombre d'Etudiants : {{ $studentsNumber }} </p>
                         </h3>
+                        <a href="{{ route('student.index') }}" class="link">Y aller !</a>
                     </div>
                     <div class="card-body flex flex-col gap-5">
 
@@ -51,9 +52,9 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <a href="{{ route('group.index') }}">Nombre de groupes :</a>
-                            <h1>{{ $nombreGroups  }}</h1>
+                            <p>   Nombre de Groupes : {{ $groupsNumber }} </p>
                         </h3>
+                        <a href="{{ route('student.index') }}" class="link">Y aller !</a>
                     </div>
                     <div class="card-body flex flex-col gap-5">
 
@@ -69,9 +70,9 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <a href="{{ route('cohort.index') }}">Nombre de promotions :</a>
-                            <h1>{{ $nombrePromotions  }}</h1>
+                            <p>   Nombre de Promotions : {{ $cohortsNumber }} </p>
                         </h3>
+                        <a href="{{ route('student.index') }}" class="link">Y aller !</a>
                     </div>
                     <div class="card-body flex flex-col gap-5">
 

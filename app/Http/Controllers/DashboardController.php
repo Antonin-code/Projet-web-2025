@@ -13,25 +13,25 @@ class DashboardController extends Controller
         $user = auth()->user();
         $userRole = auth()->user()->school()->pivot->role;
 
-        // On récupère le nombre d'étudiants/d'enseignant/promotions/groupes seulement si on est admin ou teacher
-        $nombreEtudiants = null;
-        $nombreEnseignants = null;
-        $nombrePromotions = null;
-        $nombreGroups = null;
+        //variables
+        $studentsNumber = null;
+        $teacherNumber = null;
+        $cohortsNumber = null;
+        $groupsNumber = null;
 
 
         if (in_array($userRole, ['admin', 'teacher'])) {
-            $nombreEtudiants = UserSchool::where('role', 'student')->count();
-            $nombreEnseignants = UserSchool::where('role', 'teacher')->count();
-            $nombrePromotions = Cohort::count();
-            $nombreGroups = Groups::count();
+            $studentsNumber = UserSchool::where('role', 'student')->count();
+            $teacherNumber = UserSchool::where('role', 'teacher')->count();
+            $cohortsNumber = Cohort::count();
+            $groupsNumber = Groups::count();
         }
 
         return view('pages.dashboard.dashboard-' . $userRole, compact(
-            'nombreEtudiants',
-            'nombreEnseignants',
-            'nombrePromotions',
-            'nombreGroups'
+            'studentsNumber',
+            'teacherNumber',
+            'cohortsNumber',
+            'groupsNumber'
         ));
     }
 }
