@@ -14,7 +14,8 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                           Nombre d'enseignant :<h1> {{ $nombreEnseignants  }}</h1>
+                            <a href="{{ route('teacher.index') }}">Nombre de Professeurs :</a>
+                            <h1>{{  $nombreEnseignants }}</h1>
                         </h3>
                     </div>
                     <div class="card-body flex flex-col gap-5">
@@ -32,7 +33,8 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            Nombre d'étudiants : <h1>{{ $nombreEtudiants }}</h1>
+                            <a href="{{ route('student.index') }}">Nombre d'étudiants :</a>
+                             <h1>{{ $nombreEtudiants }}</h1>
                         </h3>
                     </div>
                     <div class="card-body flex flex-col gap-5">
@@ -49,7 +51,8 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            Nombre de Groupes : <h1>{{ $nombreGroups  }}</h1> href
+                            <a href="{{ route('group.index') }}">Nombre de groupes :</a>
+                            <h1>{{ $nombreGroups  }}</h1>
                         </h3>
                     </div>
                     <div class="card-body flex flex-col gap-5">
@@ -66,7 +69,8 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            Nombre de Promotions: <h1>{{ $nombrePromotions  }}</h1>
+                            <a href="{{ route('cohort.index') }}">Nombre de promotions :</a>
+                            <h1>{{ $nombrePromotions  }}</h1>
                         </h3>
                     </div>
                     <div class="card-body flex flex-col gap-5">

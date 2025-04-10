@@ -13,7 +13,7 @@ class TeacherController extends Controller
     public function index()
     {
         $count = User::count();
-        return view('pages.students.index',['student'=> $count]  );
+        return view('pages.teachers.index',['teacher'=> $count]  );
     }
 
 
