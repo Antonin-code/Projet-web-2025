@@ -55,6 +55,9 @@ Route::middleware('auth')->group(function () {
         //route to show students
         Route::get('showStudents', [StudentController::class, 'showStudents'])->name('students.showStudents');;
 
+        //route to destroy
+        Route::delete('/students', [StudentController::class, 'destroy'])->name('student.destroy');
+
     });
 
 });

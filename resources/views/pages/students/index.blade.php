@@ -128,19 +128,19 @@
                     <form method="post" action ="{{route('student.store')}}">
                         @csrf
                         <label>
-                            <input type="text" name="first_name" placeholder="Prénom">
+                            <input type="text" name="first_name" placeholder="Prénom" required>
                         </label><br><br>
 
                         <label>
-                            <input type="text" name="last_name" placeholder="Nom">
+                            <input type="text" name="last_name" placeholder="Nom" required>
                         </label><br><br>
 
                         <label>
-                            <input type="text" name="email" placeholder="Email">
+                            <input type="text" name="email" placeholder="Email" required>
                         </label><br><br>
 
                         <label>
-                            <input type="date" name="birth_date" placeholder="Date de naissance">
+                            <input type="date" name="birth_date" placeholder="Date de naissance" required>
                         </label><br><br>
 
                         <button type="submit">Envoyer</button>

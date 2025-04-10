@@ -38,4 +38,11 @@ class StudentController extends Controller
 
         return view('pages.students.index', compact('students'));
     }
+
+    public function destroy($students)
+    {
+        $students = User::findOrFail($students);
+        $students->delete();
+        return redirect()->route('student.index')->with('success', 'Étudiant supprimé avec succès.');
+    }
 }
