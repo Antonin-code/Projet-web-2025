@@ -12,7 +12,8 @@ class StudentController extends Controller
     public function index()
     {
         $count = User::count();
-        return view('pages.students.index', ['student' => $count]);
+        $students = UserSchool::where('role','student')->get();
+        return view('pages.students.index', ['student' => $count, 'students' => $students]);
 
     }
 
@@ -28,5 +29,13 @@ class StudentController extends Controller
         UserSchool:: create(['user_id'=>$user->id,'school_id'=> 1,'role'=>'student']);
         return redirect()->route('student.index')->with('success', 'User created successfully!');
 
+    }
+
+    //function to showStudents
+    public function showStudents()
+    {
+        $students = UserSchool::where('role','student')->get();
+
+        return view('pages.students.index', compact('students'));
     }
 }

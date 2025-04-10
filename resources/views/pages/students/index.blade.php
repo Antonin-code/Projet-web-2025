@@ -74,6 +74,15 @@
                                             <td>Joe</td>
                                             <td>Dohn</td>
                                             <td>02/12/2000</td>
+
+                                        @foreach ($students as $student)
+                                            <tr>
+                                                <td>{{ $student->user()->last_name }}</td>
+                                                <td>{{ $student->user()->first_name }}</td>
+                                                <td>{{ $student->user()->birth_date }}</td>
+                                            </tr>
+                                        @endforeach
+
                                             <td>
                                                 <div class="flex items-center justify-between">
                                                     <a href="#">

@@ -46,9 +46,14 @@ Route::middleware('auth')->group(function () {
         // Common life
         Route::get('common-life', [CommonLifeController::class, 'index'])->name('common-life.index');
 
+        //Route to store students
         Route::post('students', [StudentController::class, 'store'])->name('student.store');
 
+        //route to do the formular
         Route::view('formulaire', 'index.blade');
+
+        //route to show students
+        Route::get('showStudents', [StudentController::class, 'showStudents'])->name('students.showStudents');;
 
     });
 
