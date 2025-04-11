@@ -1,4 +1,10 @@
 <x-app-layout>
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <x-slot name="header">
         <h1 class="flex items-center gap-1 text-sm font-normal">
             <span class="text-gray-700">
@@ -43,43 +49,44 @@
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
-                                        <th class="w-[70px]"></th>
+                                        <th class="min-w-[135px]">
+                                            <span class="sort">
+                                                <span class="sort-label">Email</span>
+                                                <span class="sort-icon"></span>
+                                            </span>
+                                        </th>
+                                        <th class="min-w-[135px]">
+                                        </th>
+                                        <th class="min-w-[135px]">
+                                        </th>
+
                                     </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Doe</td>
-                                            <td>John</td>
-                                            <td>12/02/2000</td>
-                                            <td>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-success ki-filled ki-shield-tick"></i>
-                                                    </a>
-
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
-                                                        <i class="ki-filled ki-cursor"></i>
-                                                    </a>
+                                        @foreach ($students as $student)
+                                            <tr>
+                                                <td>{{ $student->user()->last_name }}</td>
+                                                <td>{{ $student->user()->first_name }}</td>
+                                                <td>{{ $student->user()->birth_date }}</td>
+                                                <td>{{ $student->user()->email }}</td>
+                                                <div class="flex items-right justify-between">
+                                                    <td>
+                                                        <form action="{{ route('student.destroy', $student->user()) }}" method="POST" onsubmit="return confirm('Supprimer cet étudiant ?');">
+                                                            @csrf
+                                                            <button type="submit" style="color: red;">Supprimer</button>
+                                                    <td> <a class="hover:text-primary cursor-pointer"
+                                                               href="#"
+                                                               data-modal-toggle="#student-modal"
+                                                               data-user='@json($student->user())'
+                                                               onclick="openEditModal(this)">
+                                                                @csrf
+                                                              <button type="button" style="color: green">Modifier</button>
+                                                            </a> </td>
+                                                        </form>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>Joe</td>
-                                            <td>Dohn</td>
-                                            <td>02/12/2000</td>
-                                            <td>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-danger ki-filled ki-shield-cross"></i>
-                                                    </a>
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
-                                                        <i class="ki-filled ki-cursor"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -107,13 +114,47 @@
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">
-                    Formulaire à créer
-                    <!-- @todo A compléter -->
+                    <form method="post" action ="{{route('student.store')}}">
+                        @csrf
+                        <label>
+                            <input type="text" name="first_name" placeholder="Prénom" required>
+                        </label><br><br>
+
+                        <label>
+                            <input type="text" name="last_name" placeholder="Nom" required>
+                        </label><br><br>
+
+                        <label>
+                            <input type="text" name="email" placeholder="Email" required>
+                        </label><br><br>
+
+                        <label>
+                            <input type="date" name="birth_date" placeholder="Date de naissance" required>
+                        </label><br><br>
+
+                        <button type="submit">Envoyer</button>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-    <!-- end: grid -->
+        <script>
+
+            //Javascript to have informations in modal
+            function openEditModal(element) {
+                const user = JSON.parse(element.dataset.user);
+                document.getElementById('edit-user-id').value = user.id;
+                document.getElementById('edit-first-name').value = user.first_name;
+                document.getElementById('edit-last-name').value = user.last_name;
+                document.getElementById('edit-email').value = user.email;
+                document.getElementById('edit-birth-date').value = user.birth_date;
+                // Dynamique action of form
+                document.getElementById('edit-user-form').action = `{{ route('student.update', ':user_id') }}`.replace(':user_id', user.id);
+
+                // View modal
+                document.getElementById('student-modal').classList.remove('hidden');
+            }
+        </script>
 </x-app-layout>
 
 @include('pages.students.student-modal')

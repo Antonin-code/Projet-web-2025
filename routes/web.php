@@ -10,6 +10,7 @@ use App\Http\Controllers\KnowledgeController;
 use App\Http\Controllers\GroupController;
 use App\Http\Controllers\TeacherController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
 // Redirect the root path to /dashboard
 Route::redirect('/', 'dashboard');
@@ -45,6 +46,21 @@ Route::middleware('auth')->group(function () {
 
         // Common life
         Route::get('common-life', [CommonLifeController::class, 'index'])->name('common-life.index');
+
+        //Route to store students
+        Route::post('students', [StudentController::class, 'store'])->name('student.store');
+
+        //route to do the formular
+        Route::view('formulaire', 'index.blade');
+
+        //route to show students
+        Route::get('showStudents', [StudentController::class, 'showStudents'])->name('students.showStudents');;
+
+        //route to destroy
+        Route::post('students/{student}', [StudentController::class, 'deleteStudents'])->name('student.destroy');
+
+        //route to update
+        Route::put('/users/{user}', [StudentController::class, 'update'])->name('student.update');
     });
 
 });
