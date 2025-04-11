@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Student;
 use App\Models\User;
 use App\Models\UserSchool;
 use Illuminate\Http\Request;
@@ -39,12 +40,10 @@ class StudentController extends Controller
         return view('pages.students.index', compact('students'));
     }
 
-    public function destroy($id)
+    //function to delete students
+    public function deleteStudents(User $student)
     {
-        $students = User::findOrFail($id);
-        $students->delete();
-        $students = UserSchool::findOrFail($id);
-        $students->delete();
-        return redirect()->route('student.index')->with('Étudiant supprimé avec succès.');
-    }
+        $student->delete();
+    return redirect('students')->with('L etudiant a bien été supprimé');
+}
 }

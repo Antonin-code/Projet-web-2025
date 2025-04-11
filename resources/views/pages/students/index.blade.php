@@ -60,19 +60,6 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-success ki-filled ki-shield-tick"></i>
-                                                    </a>
-
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
-                                                        <i class="ki-filled ki-cursor"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
                                         @foreach ($students as $student)
                                             <tr>
                                                 <td>{{ $student->user()->last_name }}</td>
@@ -81,30 +68,16 @@
                                                 <td>{{ $student->user()->email }}</td>
                                                 <div class="flex items-right justify-between">
                                                     <td>
-                                                        <form action="{{ route('student.destroy', $student->id) }}" method="POST" onsubmit="return confirm('Supprimer cet étudiant ?');">
+                                                        <form action="{{ route('student.destroy', $student->user()) }}" method="POST" onsubmit="return confirm('Supprimer cet étudiant ?');">
                                                             @csrf
-                                                            @method('DELETE')
                                                             <button type="submit" style="color: red;">Supprimer</button>
                                                         </form>
                                                     </td>
-                                                    <td><button  type="submit">Modifier  </button></td>
-
+                                                    <td><button  type="submit">Modifier  </button>
+                                                    </td>
                                                 </div>
                                             </tr>
                                         @endforeach
-
-                                            <td>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-danger ki-filled ki-shield-cross"></i>
-                                                    </a>
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
-                                                        <i class="ki-filled ki-cursor"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -149,7 +122,6 @@
                         <label>
                             <input type="date" name="birth_date" placeholder="Date de naissance" required>
                         </label><br><br>
-
                         <button type="submit">Envoyer</button>
                     </form>
                 </div>

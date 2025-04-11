@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
 
         // Create the default school
         $school = School::create([
-            'user_id'   => $user->id,
+            'user_id'   => $admin->id,
             'name'      => 'Coding Factory',
         ]);
 
