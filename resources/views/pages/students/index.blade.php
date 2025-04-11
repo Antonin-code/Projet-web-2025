@@ -55,7 +55,11 @@
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
-                                        <th class="w-[70px]"></th>
+                                        <th class="min-w-[135px]">
+                                        </th>
+                                        <th class="min-w-[135px]">
+                                        </th>
+
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -71,10 +75,15 @@
                                                         <form action="{{ route('student.destroy', $student->user()) }}" method="POST" onsubmit="return confirm('Supprimer cet étudiant ?');">
                                                             @csrf
                                                             <button type="submit" style="color: red;">Supprimer</button>
+                                                    <td> <a class="hover:text-primary cursor-pointer"
+                                                               href="#"
+                                                               data-modal-toggle="#student-modal"
+                                                               data-user='@json($student->user())'
+                                                               onclick="openEditModal(this)">
+                                                                @csrf
+                                                              <button type="button" style="color: green">Modifier</button>
+                                                            </a> </td>
                                                         </form>
-                                                    </td>
-                                                    <td><button  type="submit">Modifier  </button>
-                                                    </td>
                                                 </div>
                                             </tr>
                                         @endforeach
@@ -122,13 +131,30 @@
                         <label>
                             <input type="date" name="birth_date" placeholder="Date de naissance" required>
                         </label><br><br>
+
                         <button type="submit">Envoyer</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    <!-- end: grid -->
+        <script>
+
+            //Javascript to have informations in modal
+            function openEditModal(element) {
+                const user = JSON.parse(element.dataset.user);
+                document.getElementById('edit-user-id').value = user.id;
+                document.getElementById('edit-first-name').value = user.first_name;
+                document.getElementById('edit-last-name').value = user.last_name;
+                document.getElementById('edit-email').value = user.email;
+                document.getElementById('edit-birth-date').value = user.birth_date;
+                // Dynamique action of form
+                document.getElementById('edit-user-form').action = `{{ route('student.update', ':user_id') }}`.replace(':user_id', user.id);
+
+                // View modal
+                document.getElementById('student-modal').classList.remove('hidden');
+            }
+        </script>
 </x-app-layout>
 
 @include('pages.students.student-modal')
