@@ -13,7 +13,7 @@ class StudentController extends Controller
     {
         $count = User::count();
         $students = UserSchool::where('role', 'student')->get();
-        return view('pages.students.index', ['student' => $count, 'students' => $students]);
+        return view('pages.students.index', compact('students', ));
 
     }
 

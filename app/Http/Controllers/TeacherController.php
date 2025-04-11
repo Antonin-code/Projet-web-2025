@@ -12,8 +12,7 @@ class TeacherController extends Controller
     //Function to search teacher in bdd
     public function index()
     {
-        $count = User::count();
-        return view('pages.teachers.index',['teacher'=> $count]  );
+        return view('pages.teachers.index');
     }
 
 
