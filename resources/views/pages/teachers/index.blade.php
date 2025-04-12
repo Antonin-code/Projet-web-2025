@@ -66,15 +66,13 @@
                                         </tr>
                                     @endforeach
                                         <tr>
-                                            <td>Joe</td>
-                                            <td>Dohn</td>
                                             <td>
                                                 <div class="flex items-center justify-between">
                                                     <a href="#">
                                                         <i class="text-danger ki-filled ki-shield-cross"></i>
                                                     </a>
                                                     <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
+                                                       data-modal-toggle="#teacher-modal">
                                                         <i class="ki-filled ki-cursor"></i>
                                                     </a>
                                                 </div>
@@ -146,7 +144,7 @@
             document.getElementById('edit-user-form').action = `{{ route('teacher.updates', ':user_id') }}`.replace(':user_id', user.id);
 
             // View modal
-            document.getElementById('student-modal').classList.remove('hidden');
+            document.getElementById('teacher-modal').classList.remove('hidden');
         }
     </script>
 </x-app-layout>
