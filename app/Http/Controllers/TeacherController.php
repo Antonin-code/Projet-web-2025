@@ -15,6 +15,19 @@ class TeacherController extends Controller
         return view('pages.teachers.index');
     }
 
+    public function store(Request $request)
+    {
+        $request->validate([
+            'last_name' => 'required|string|max:100',
+            'first_name' => 'required|string|max:100',
+            'email' => 'required|email|max:100',
+            'birth_date' => 'required|date',
+        ]);
+        $user = User:: create(['last_name' => $request->last_name, 'first_name' => $request->first_name, 'email' => $request->email, 'birth_date' => $request->birth_date, 'password' => $request->email]);
+        UserSchool:: create(['user_id' => $user->id, 'school_id' => 1, 'role' => 'teacher']);
+        return redirect()->route('teachers.index')->with('Terminé !', 'Utilisateur créé avec succès');
+
+    }
     public function showTeachers()
     {
         $teachers = UserSchool::where('role', 'teacher')->get();
@@ -23,14 +36,14 @@ class TeacherController extends Controller
     }
 
     //function to delete teachers
-    public function deleteTeacher(User $teachers)
+    public function deleteTeachers(User $teachers)
     {
         $teachers->delete();
         return redirect('students')->with('Le professeur a bien été supprimé');
     }
 
     //function to update users
-    public function update(Request $request, User $user)
+    public function updateTeacher(Request $request, User $user)
     {
         $request->validate([
             'last_name' => 'required|string|max:255',

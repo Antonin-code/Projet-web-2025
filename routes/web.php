@@ -63,15 +63,15 @@ Route::middleware('auth')->group(function () {
         Route::put('/users/{user}', [StudentController::class, 'update'])->name('student.update');
 
         //route to show teacher
-        Route::get('showTeacher', [TeacherController::class, 'showTeacher'])->name('teacher.showTeacher');;
+        Route::get('showTeacher', [TeacherController::class, 'showTeachers'])->name('teacher.showTeachers');;
 
         //route to destroy teacher
-        Route::post('teacher/{teacher}', [TeacherController::class, 'deleteTeacher'])->name('teacherDestroy');
+        Route::post('teacher/{teacher}', [TeacherController::class, 'deleteTeachers'])->name('teacherDestroy');
 
         //route to update teacher
-        Route::put('/users/{user}', [TeacherController::class, 'updateTeacher'])->name('teacher.update');
+        Route::put('/user/{user}', [TeacherController::class, 'updateTeacher'])->name('teacher.updates');
 
-        //Route to store students
+        //Route to store teachers
         Route::post('teacher', [TeacherController::class, 'store'])->name('teacher.store');
     });
 

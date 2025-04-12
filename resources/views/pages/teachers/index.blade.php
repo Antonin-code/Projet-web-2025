@@ -143,7 +143,7 @@
             document.getElementById('edit-email').value = user.email;
             document.getElementById('edit-birth-date').value = user.birth_date;
             // Dynamique action of form
-            document.getElementById('edit-user-form').action = `{{ route('teacher.update', ':user_id') }}`.replace(':user_id', user.id);
+            document.getElementById('edit-user-form').action = `{{ route('teacher.updates', ':user_id') }}`.replace(':user_id', user.id);
 
             // View modal
             document.getElementById('student-modal').classList.remove('hidden');
