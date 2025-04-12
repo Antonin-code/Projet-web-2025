@@ -41,22 +41,30 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    <tr>
+                                    @foreach ($teachers as $teacher)
                                         <tr>
-                                            <td>Doe</td>
-                                            <td>John</td>
-                                            <td>
-                                                <div class="flex items-center justify-between">
-                                                    <a href="#">
-                                                        <i class="text-success ki-filled ki-shield-tick"></i>
-                                                    </a>
-
-                                                    <a class="hover:text-primary cursor-pointer" href="#"
-                                                       data-modal-toggle="#student-modal">
-                                                        <i class="ki-filled ki-cursor"></i>
-                                                    </a>
-                                                </div>
-                                            </td>
+                                            <td>{{ $teacher->user()->last_name }}</td>
+                                            <td>{{ $teacher->user()->first_name }}</td>
+                                            <td>{{ $teacher->user()->birth_date }}</td>
+                                            <td>{{ $teacher->user()->email }}</td>
+                                            <div class="flex items-right justify-between">
+                                                <td>
+                                                    <form action="{{ route('$teacher.destroy', $teacher->user()) }}" method="POST" onsubmit="return confirm('Supprimer cet enseignant?');">
+                                                        @csrf
+                                                        <button type="submit" style="color: red;">Supprimer</button>
+                                                        <td> <a class="hover:text-primary cursor-pointer"
+                                                                href="#"
+                                                                data-modal-toggle="#student-modal"
+                                                                data-user='@json($teacher->user())'
+                                                                onclick="openEditModal(this)">
+                                                                @csrf
+                                                                <button type="button" style="color: green">Modifier</button>
+                                                            </a> </td>
+                                                    </form>
+                                            </div>
                                         </tr>
+                                    @endforeach
                                         <tr>
                                             <td>Joe</td>
                                             <td>Dohn</td>
@@ -99,13 +107,48 @@
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">
-                    Formulaire à créer
-                    <!-- @todo A compléter -->
+                    <form method="post" action ="{{route('teacher.store')}}">
+                        @csrf
+                        <label>
+                            <input type="text" name="first_name" placeholder="Prénom" required>
+                        </label><br><br>
+
+                        <label>
+                            <input type="text" name="last_name" placeholder="Nom" required>
+                        </label><br><br>
+
+                        <label>
+                            <input type="text" name="email" placeholder="Email" required>
+                        </label><br><br>
+
+                        <label>
+                            <input type="date" name="birth_date" placeholder="Date de naissance" required>
+                        </label><br><br>
+
+                        <button type="submit">Envoyer</button>
+                    </form>
+                </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- end: grid -->
+    <script>
+
+        //Javascript to have informations in modal
+        function openEditModal(element) {
+            const user = JSON.parse(element.dataset.user);
+            document.getElementById('edit-user-id').value = user.id;
+            document.getElementById('edit-first-name').value = user.first_name;
+            document.getElementById('edit-last-name').value = user.last_name;
+            document.getElementById('edit-email').value = user.email;
+            document.getElementById('edit-birth-date').value = user.birth_date;
+            // Dynamique action of form
+            document.getElementById('edit-user-form').action = `{{ route('teacher.update', ':user_id') }}`.replace(':user_id', user.id);
+
+            // View modal
+            document.getElementById('student-modal').classList.remove('hidden');
+        }
+    </script>
 </x-app-layout>
 
 @include('pages.teachers.teacher-modal')
