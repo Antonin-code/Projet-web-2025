@@ -50,12 +50,12 @@
                                             <td>{{ $teacher->user()->email }}</td>
                                             <div class="flex items-right justify-between">
                                                 <td>
-                                                    <form action="{{ route('$teacher.destroy', $teacher->user()) }}" method="POST" onsubmit="return confirm('Supprimer cet enseignant?');">
+                                                    <form action="{{ route('teacher.destroy', $teacher->user()) }}" method="POST" onsubmit="return confirm('Supprimer cet enseignant?');">
                                                         @csrf
                                                         <button type="submit" style="color: red;">Supprimer</button>
                                                         <td> <a class="hover:text-primary cursor-pointer"
                                                                 href="#"
-                                                                data-modal-toggle="#student-modal"
+                                                                data-modal-toggle="#teacher-modal"
                                                                 data-user='@json($teacher->user())'
                                                                 onclick="openEditModal(this)">
                                                                 @csrf

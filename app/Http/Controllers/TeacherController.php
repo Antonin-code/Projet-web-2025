@@ -4,17 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Teacher;
 use App\Models\User;
+use App\Models\UserSchool;
 use Illuminate\Http\Request;
 use function Symfony\Component\String\u;
 
 class TeacherController extends Controller
 {
-    //Function to search teacher in bdd
+    //Function to search teachers in bdd
     public function index()
     {
-        return view('pages.teachers.index');
+        $count = User::count();
+        $teachers = UserSchool::where('role', 'teacher')->get();
+        return view('pages.teachers.index', compact('teachers', ));
+
     }
 
+    //Function so store teachers
     public function store(Request $request)
     {
         $request->validate([
@@ -39,7 +44,7 @@ class TeacherController extends Controller
     public function deleteTeachers(User $teachers)
     {
         $teachers->delete();
-        return redirect('students')->with('Le professeur a bien été supprimé');
+        return redirect('teachers')->with('Le professeur a bien été supprimé');
     }
 
     //function to update users

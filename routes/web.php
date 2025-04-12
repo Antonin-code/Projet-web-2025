@@ -66,7 +66,7 @@ Route::middleware('auth')->group(function () {
         Route::get('showTeacher', [TeacherController::class, 'showTeachers'])->name('teacher.showTeachers');;
 
         //route to destroy teacher
-        Route::post('teacher/{teacher}', [TeacherController::class, 'deleteTeachers'])->name('teacherDestroy');
+        Route::post('teacher/{teacher}', [TeacherController::class, 'deleteTeachers'])->name('teacher.destroy');
 
         //route to update teacher
         Route::put('/user/{user}', [TeacherController::class, 'updateTeacher'])->name('teacher.updates');
