@@ -16,8 +16,10 @@ class CohortController extends Controller
      */
     public function index()
     {
-        return view('pages.cohorts.index');
+        $cohorts = Cohort::get();
+        return view('pages.cohort.index', compact('cohorts' ));
     }
+
 
 
     /**
@@ -34,7 +36,7 @@ class CohortController extends Controller
     }
 
     //function to update users
-    public function update(Request $request, Cohort $cohort)
+    public function update(Request $request, Cohort $cohorts)
     {
         $request->validate([
             'school_id' => 'required|int|max:255',
@@ -45,7 +47,7 @@ class CohortController extends Controller
         ]);
 
         // Update cohort
-        $cohort->update([
+        $cohorts->update([
             'school_id' => $request->school_id,
             'name' => $request->name,
             'description' => $request->description,
@@ -73,7 +75,7 @@ class CohortController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date',
         ]);
-        $user = Cohort:: create([ 'school_id' => $request->school_id, 'name' => $request->name,'description' => $request->description, 'start_date' => $request->start_date, 'end_date' => $request->end_date]);
+        $cohort = Cohort:: create([ 'school_id' => $request->school_id, 'name' => $request->name,'description' => $request->description, 'start_date' => $request->start_date, 'end_date' => $request->end_date]);
         return redirect()->route('cohort.index')->with('Terminé !', 'Promotion crée avec succes');
 
     }

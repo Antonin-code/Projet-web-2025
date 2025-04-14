@@ -49,6 +49,29 @@
                                                    href="{{ route('cohort.show', 1) }}">
                                                     Promotion B1
                                                 </a>
+                                                @foreach ($cohorts as $cohort)
+                                                    <tr>
+                                                        <td>{{ $cohort->cohortGroup()->name }}</td>
+                                                        <td>{{ $cohort->cohortGroup()->description }}</td>
+                                                        <td>{{ $cohort->cohortGroup()->start_date }}</td>
+                                                        <td>{{ $cohort->cohortGroup()->end_date }}</td>
+                                                        <div class="flex items-right justify-between">
+                                                            <td>
+                                                                <form action="{{ route('$cohort.destroy', $cohort->user()) }}" method="POST" onsubmit="return confirm('Supprimer cette promotion?');">
+                                                                    @csrf
+                                                                    <button type="submit" style="color: red;">Supprimer</button>
+                                                                    <td> <a class="hover:text-primary cursor-pointer"
+                                                                            href="#"
+                                                                            data-modal-toggle="#student-modal"
+                                                                            data-user='@json($cohort->user())'
+                                                                            onclick="openEditModal(this)">
+                                                                            @csrf
+                                                                            <button type="button" style="color: green">Modifier</button>
+                                                                        </a> </td>
+                                                                </form>
+                                                        </div>
+                                                    </tr>
+                                                @endforeach
                                                 <span class="text-2sm text-gray-700 font-normal leading-3">
                                                     Cergy
                                                 </span>
@@ -84,6 +107,8 @@
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">
+                    <form method="post" action ="{{route('cohort.store')}}">
+                        @csrf
                     <x-forms.input name="name" :label="__('Nom')" />
 
                     <x-forms.input name="description" :label="__('Description')" />
@@ -99,5 +124,19 @@
             </div>
         </div>
     </div>
-    <!-- end: grid -->
+    <script>
+        //Javascript to have informations in modal
+        function openEditModal(element) {
+            const cohort = JSON.parse(element.dataset.cohort);
+            document.getElementById('edit-name').value = cohort.name;
+            document.getElementById('edit-description').value = cohort.description;
+            document.getElementById('edit-start_date').value = cohort.start_date;
+            document.getElementById('edit-end').value = cohort.end_date;
+            // Dynamique action of form
+            document.getElementById('edit-cohort-form').action = `{{ route('cohort.updates', ':user_id') }}`.replace(':user_id', user.id);
+
+            // View modal
+            document.getElementById('cohort-modal').classList.remove('hidden');
+        }
+    </script>
 </x-app-layout>
