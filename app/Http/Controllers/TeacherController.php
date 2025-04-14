@@ -30,19 +30,19 @@ class TeacherController extends Controller
         ]);
         $user = User:: create(['last_name' => $request->last_name, 'first_name' => $request->first_name, 'email' => $request->email, 'birth_date' => $request->birth_date, 'password' => $request->email]);
         UserSchool:: create(['user_id' => $user->id, 'school_id' => 1, 'role' => 'teacher']);
-        return redirect()->route('teachers.index')->with('Terminé !', 'Utilisateur créé avec succès');
+        return redirect()->route('teacher.index')->with('Terminé !', 'Utilisateur créé avec succès');
 
     }
 
     //function to delete teachers
-    public function deleteTeachers(User $teachers)
+    public function deleteTeachers(User $teacher)
     {
-        $teachers->delete();
+        $teacher->delete();
         return redirect('teachers')->with('Le professeur a bien été supprimé');
     }
 
     //function to update users
-    public function updateTeacher(Request $request, User $user)
+    public function updateTeacher(Request $request, User $teachers)
     {
         $request->validate([
             'last_name' => 'required|string|max:255',
@@ -52,7 +52,7 @@ class TeacherController extends Controller
         ]);
 
         // Update user
-        $user->update([
+        $teachers->update([
             'last_name' => $request->last_name,
             'first_name' => $request->first_name,
             'birth_date' => $request->birth_date,
