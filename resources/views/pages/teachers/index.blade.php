@@ -40,8 +40,7 @@
                                         <th class="w-[70px]"></th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
+                                    <tbody id="viewFormTeacher">
                                     @foreach ($teachers as $teacher)
                                         <tr>
                                             <td>{{ $teacher->user()->last_name }}</td>
@@ -98,7 +97,7 @@
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">
-                    <form method="post" action ="{{route('teacher.store')}}">
+                    <form id="formTeacher" method="post" action ="">
                         @csrf
                         <label>
                             <input type="text" name="first_name" placeholder="Prénom" required>
@@ -138,6 +137,60 @@
             // View modal
             document.getElementById('teacher-modal').classList.remove('hidden');
         }
+
+    </script>
+    <script src="{{ asset('js/jquery.js') }}" type ="text/javascript" > </script>
+    <script type ="module">
+        $("#formTeacher").on("submit",function(event) {
+            event.preventDefault()
+            var data = $("#formTeacher").serialize()
+            $.ajax({
+                url: "{{route('teacher.store')}}",
+                type: "POST",
+                data: data,
+                success: function(response) {
+                    console.log('Success response:', response);
+                    let newRow = createTeacherRow(response.teacher);
+                    $('#viewFormTeacher').append(newRow); //This code should add a row to the table but it does not appear(Antonin)
+                    // According to the jQuery documentation this should work but it doesn't.
+                    //To fix it i can only refresh the page
+                    location.reload()
+                },
+                error:function(){
+                    alert("error")
+                }
+            });
+            console.log(event)
+
+            console.log(data)
+        })
+
+        function createTeacherRow(teacher) {
+            return `
+        <tr>
+            <td>${teacher.last_name}</td>
+            <td>${teacher.first_name}</td>
+            <td>${teacher.birth_date}</td>
+            <td>${teacher.email}</td>
+            <td>
+                <form action="{{ route('teacher.destroy', $teacher->user()) }}" method="POST" onsubmit="return confirm('Supprimer cet étudiant ?');">
+                    <input type="hidden" name="_token" value="${$('meta[name="csrf-token"]').attr('content')}">
+                    <button type="submit" style="color: red;">Supprimer</button>
+                </form>
+            </td>
+            <td>
+                <a class="hover:text-primary cursor-pointer"
+                   href="#"
+                   data-modal-toggle="#teacher-modal"
+                   data-user='${JSON.stringify(teacher)}'
+                   onclick="openEditModal(this)">
+                   <button type="button" style="color: green">Modifier</button>
+                </a>
+            </td>
+        </tr>
+    `;
+        }
+
     </script>
 </x-app-layout>
 

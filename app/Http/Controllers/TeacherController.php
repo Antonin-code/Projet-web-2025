@@ -30,7 +30,10 @@ class TeacherController extends Controller
         ]);
         $user = User:: create(['last_name' => $request->last_name, 'first_name' => $request->first_name, 'email' => $request->email, 'birth_date' => $request->birth_date, 'password' => $request->email]);
         UserSchool:: create(['user_id' => $user->id, 'school_id' => 1, 'role' => 'teacher']);
-        return redirect()->route('teacher.index')->with('Terminé !', 'Utilisateur créé avec succès');
+        return response()->json([
+            'success' => true,
+            'teacher' => $user
+        ]);
 
     }
 
