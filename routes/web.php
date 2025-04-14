@@ -78,6 +78,23 @@ Route::middleware('auth')->group(function () {
 
         //Route to store teachers
         Route::post('cohort', [CohortController ::class, 'store'])->name('cohort.store');
+
+
+        //Route to delete profile
+        Route::middleware(['auth'])->group(function () {
+            Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+        });
+
+
+
+
+
+
+
+
+
+
+
     });
 
 });
