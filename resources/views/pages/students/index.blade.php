@@ -22,7 +22,7 @@
                     <div class="card-body">
                         <div data-datatable="true" data-datatable-page-size="5">
                             <div class="scrollable-x-auto">
-                                <table class="table table-border" data-datatable-table="true">
+                                <table class="table table-border" data-datatable-table="true" id="students">
                                     <thead>
                                     <tr>
                                         <th class="min-w-[135px]">
