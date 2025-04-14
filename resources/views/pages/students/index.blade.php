@@ -1,9 +1,5 @@
 <x-app-layout>
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+
 
     <x-slot name="header">
         <h1 class="flex items-center gap-1 text-sm font-normal">
@@ -139,7 +135,6 @@
         </div>
     </div>
         <script>
-
             //Javascript to have informations in modal
             function openEditModal(element) {
                 const user = JSON.parse(element.dataset.user);

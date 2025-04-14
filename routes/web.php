@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/teachers', [TeacherController::class, 'index'])->name('teacher.index');
 
         // Students
-        Route::get('students', [StudentController::class, 'index'])->name('student.index');
+        Route::get('/students', [StudentController::class, 'index'])->name('student.index');
 
         // Knowledge
         Route::get('knowledge', [KnowledgeController::class, 'index'])->name('knowledge.index');
@@ -54,16 +54,12 @@ Route::middleware('auth')->group(function () {
         Route::view('formulaire', 'index.blade');
 
         //route to show students
-        Route::get('showStudents', [StudentController::class, 'showStudents'])->name('students.showStudents');;
 
         //route to destroy students
         Route::post('students/{student}', [StudentController::class, 'deleteStudents'])->name('student.destroy');
 
         //route to update students
         Route::put('/users/{user}', [StudentController::class, 'update'])->name('student.update');
-
-        //route to show teacher
-        Route::get('showTeacher', [TeacherController::class, 'showTeachers'])->name('teacher.showTeachers');;
 
         //route to destroy teacher
         Route::post('teacher/{teacher}', [TeacherController::class, 'deleteTeachers'])->name('teacher.destroy');
@@ -73,6 +69,15 @@ Route::middleware('auth')->group(function () {
 
         //Route to store teachers
         Route::post('teacher', [TeacherController::class, 'store'])->name('teacher.store');
+
+        //route to destroy cohorts
+        Route::post('cohort/{cohort}', [CohortController ::class, 'deleteCohorts'])->name('cohort.destroy');
+
+        //route to update teacher
+        Route::put('/user/{user}', [CohortController ::class, 'updateCohorts'])->name('cohort.updates');
+
+        //Route to store teachers
+        Route::post('cohort', [CohortController ::class, 'store'])->name('cohort.store');
     });
 
 });

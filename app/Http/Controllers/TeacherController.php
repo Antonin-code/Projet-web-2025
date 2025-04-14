@@ -15,7 +15,7 @@ class TeacherController extends Controller
     {
         $count = User::count();
         $teachers = UserSchool::where('role', 'teacher')->get();
-        return view('pages.teachers.index', compact('teachers', ));
+        return view('pages.teachers.index', compact('teachers' ));
 
     }
 
@@ -32,12 +32,6 @@ class TeacherController extends Controller
         UserSchool:: create(['user_id' => $user->id, 'school_id' => 1, 'role' => 'teacher']);
         return redirect()->route('teachers.index')->with('Terminé !', 'Utilisateur créé avec succès');
 
-    }
-    public function showTeachers()
-    {
-        $teachers = UserSchool::where('role', 'teacher')->get();
-
-        return view('pages.teachers.index', compact('teachers'));
     }
 
     //function to delete teachers

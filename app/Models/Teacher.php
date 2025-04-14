@@ -10,7 +10,7 @@ class Teacher extends Model
     public $timestamps = true;
 
     public function teacher(){
-        return $this->belongsTo('App\Models\Teacher');
+        return $this->belongsTo('App\Models\User');
     }
 
 

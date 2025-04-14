@@ -129,7 +129,6 @@
                 </div>
             </div>
         </div>
-    </div>
     <script>
 
         //Javascript to have informations in modal
