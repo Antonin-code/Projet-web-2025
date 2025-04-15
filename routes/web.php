@@ -73,10 +73,10 @@ Route::middleware('auth')->group(function () {
         //route to destroy cohorts
         Route::post('cohort/{cohort}', [CohortController ::class, 'deleteCohorts'])->name('cohort.destroy');
 
-        //route to update teacher
+        //route to update cohorts
         Route::put('/user/{user}', [CohortController ::class, 'updateCohorts'])->name('cohort.updates');
 
-        //Route to store teachers
+        //Route to store cohorts
         Route::post('cohort', [CohortController ::class, 'store'])->name('cohort.store');
     });
 
