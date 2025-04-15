@@ -5,7 +5,10 @@ use App\Models\Student;
 use App\Models\User;
 use App\Models\UserSchool;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use function Laravel\Prompts\password;
+use App\Mail\mailPassword;
+use Illuminate\Support\Facades\Mail;
 
 class StudentController extends Controller
 {
@@ -26,6 +29,11 @@ class StudentController extends Controller
         ]);
         $user = User:: create(['last_name' => $request->last_name, 'first_name' => $request->first_name, 'email' => $request->email, 'birth_date' => $request->birth_date, 'password' => $request->email]);
         UserSchool:: create(['user_id' => $user->id, 'school_id' => 1, 'role' => 'student']);
+
+
+        $password = Str::random(10);
+        Mail::to($user->email)->send(new  mailPassword ($user, $password));
+
         return redirect()->route('student.index')->with('Terminé !', 'Utilisateur créé avec succès');
 
     }

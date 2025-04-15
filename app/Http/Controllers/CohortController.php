@@ -16,8 +16,8 @@ class CohortController extends Controller
      */
     public function index()
     {
-        $cohorts = Cohort::get();
-        return view('pages.cohort.index', compact('cohorts' ));
+        $cohorts = Cohort::all();
+        return view('pages.cohorts.index', compact('cohorts' ));
     }
 
 
@@ -39,7 +39,6 @@ class CohortController extends Controller
     public function update(Request $request, Cohort $cohorts)
     {
         $request->validate([
-            'school_id' => 'required|int|max:255',
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'start_date' => 'required|date',
@@ -48,7 +47,7 @@ class CohortController extends Controller
 
         // Update cohort
         $cohorts->update([
-            'school_id' => $request->school_id,
+            'school_id' => 1,
             'name' => $request->name,
             'description' => $request->description,
             'start_date' => $request->start_date,
@@ -68,15 +67,21 @@ class CohortController extends Controller
     //Function to store cohorts
     public function store(Request $request)
     {
-        $request->validate([
-            'school_id' => 'required|string|max:100',
-            'name' => 'required|email|max:100',
-            'description' => 'required|email|max:100',
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'start_date' => 'required|date',
-            'end_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
         ]);
-        $cohort = Cohort:: create([ 'school_id' => $request->school_id, 'name' => $request->name,'description' => $request->description, 'start_date' => $request->start_date, 'end_date' => $request->end_date]);
-        return redirect()->route('cohort.index')->with('Terminé !', 'Promotion crée avec succes');
 
+        Cohort::create([
+            'school_id' => 1,
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'start_date' => $validated['start_date'],
+            'end_date' => $validated['end_date'],
+        ]);
+
+        return redirect()->route('cohort.index')->with('success', 'Promotion ajoutée avec succès !');
     }
 }

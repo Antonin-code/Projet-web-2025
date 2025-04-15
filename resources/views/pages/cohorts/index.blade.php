@@ -39,47 +39,53 @@
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
+                                        </th>
+                                        <th class="min-w-[135px]">
+                                        </th>
+                                        <th class="min-w-[135px]">
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($cohorts as $cohort)
                                         <tr>
                                         <td>
                                             <div class="flex flex-col gap-2">
                                                 <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
-                                                   href="{{ route('cohort.show', 1) }}">
-                                                    Promotion B1
+                                                   href="{{ route('cohort.show', $cohort->id )}}">
+                                                    {{ $cohort->name }}
                                                 </a>
-                                                @foreach ($cohorts as $cohort)
-                                                    <tr>
-                                                        <td>{{ $cohort->cohortGroup()->name }}</td>
-                                                        <td>{{ $cohort->cohortGroup()->description }}</td>
-                                                        <td>{{ $cohort->cohortGroup()->start_date }}</td>
-                                                        <td>{{ $cohort->cohortGroup()->end_date }}</td>
+
+                                                        <td>
+                                                            <div class="flex flex-col gap-2">
+                                                                <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
+                                                                   href="{{ route('cohort.show', $cohort->id) }}">
+                                                                    {{ $cohort->name }}
+                                                                </a>
+                                                                <span class="text-2sm text-gray-700 font-normal leading-3">
+                                                                  {{ $cohort->location ?? 'Not specify' }}
+                                                              </span>
+                                                            </div>
+                                                        </td>
+                                                        <td>{{ $cohort->start_date}}</td>
+                                                        <td>{{ $cohort->end_date }}</td>
                                                         <div class="flex items-right justify-between">
                                                             <td>
-                                                                <form action="{{ route('$cohort.destroy', $cohort->user()) }}" method="POST" onsubmit="return confirm('Supprimer cette promotion?');">
+                                                                <form action="{{ route('cohort.destroy', $cohort) }}" method="POST" onsubmit="return confirm('Supprimer cette promotion ?');">
                                                                     @csrf
                                                                     <button type="submit" style="color: red;">Supprimer</button>
                                                                     <td> <a class="hover:text-primary cursor-pointer"
                                                                             href="#"
-                                                                            data-modal-toggle="#student-modal"
-                                                                            data-user='@json($cohort->user())'
+                                                                            data-modal-toggle="#cohort-modal"
+                                                                            data-user='@json($cohort)'
                                                                             onclick="openEditModal(this)">
                                                                             @csrf
                                                                             <button type="button" style="color: green">Modifier</button>
                                                                         </a> </td>
                                                                 </form>
                                                         </div>
-                                                    </tr>
+
                                                 @endforeach
-                                                <span class="text-2sm text-gray-700 font-normal leading-3">
-                                                    Cergy
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td>2024-2025</td>
-                                        <td>34</td>
-                                    </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -113,10 +119,9 @@
 
                     <x-forms.input name="description" :label="__('Description')" />
 
-                    <x-forms.input type="date" name="year" :label="__('Début de l\'année')" placeholder="" />
+                    <x-forms.input type="date" name="start_date" :label="('Début de l\'année')"/>
 
-                    <x-forms.input type="date" name="year" :label="__('Fin de l\'année')" placeholder="" />
-
+                    <x-forms.input type="date" name="end_date" :label="('Fin de l\'année')"/>
                     <x-forms.primary-button>
                         {{ __('Valider') }}
                     </x-forms.primary-button>
