@@ -52,7 +52,7 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <p>   Nombre de Groupes : {{ $groupsNumber }} </p>
+                            <p>   Nombre de Groupes : 0 </p>
                         </h3>
                         <a href="{{ route('student.index') }}" class="link">Y aller !</a>
                     </div>
