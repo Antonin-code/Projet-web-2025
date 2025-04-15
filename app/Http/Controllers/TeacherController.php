@@ -13,8 +13,7 @@ class TeacherController extends Controller
     //Function to search teachers in bdd
     public function index()
     {
-        $count = User::count();
-        $teachers = UserSchool::where('role', 'teacher')->get();
+        $teachers = User::getUsers('teacher');
         return view('pages.teachers.index', compact('teachers' ));
 
     }
@@ -30,9 +29,14 @@ class TeacherController extends Controller
         ]);
         $user = User:: create(['last_name' => $request->last_name, 'first_name' => $request->first_name, 'email' => $request->email, 'birth_date' => $request->birth_date, 'password' => $request->email]);
         UserSchool:: create(['user_id' => $user->id, 'school_id' => 1, 'role' => 'teacher']);
+
+
+        $teacherRow = view('pages.teachers.teacher-row', ['teacher' => $user])->render();
+
         return response()->json([
-            'success' => true,
-            'teacher' => $user
+            'success'   => true,
+            'teacher'   => $user,
+            'dom'       => $teacherRow
         ]);
 
     }

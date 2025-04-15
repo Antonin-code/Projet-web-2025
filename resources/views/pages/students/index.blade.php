@@ -22,7 +22,7 @@
                     <div class="card-body">
                         <div data-datatable="true" data-datatable-page-size="5">
                             <div class="scrollable-x-auto">
-                                <table class="table table-border" data-datatable-table="true" id="students">
+                                <table class="table table-border" data-datatable-table="true" id="students-table">
                                     <thead>
                                     <tr>
                                         <th class="min-w-[135px]">
@@ -59,27 +59,7 @@
                                     <tbody id="viewFormStudent">
 
                                         @foreach ($students as $student)
-                                            <tr>
-                                                <td>{{ $student->user()->last_name }}</td>
-                                                <td>{{ $student->user()->first_name }}</td>
-                                                <td>{{ $student->user()->birth_date }}</td>
-                                                <td>{{ $student->user()->email }}</td>
-                                                <div class="flex items-right justify-between">
-                                                    <td>
-                                                        <form action="{{ route('student.destroy', $student->user()) }}" method="POST" onsubmit="return confirm('Supprimer cet étudiant ?');">
-                                                            @csrf
-                                                            <button type="submit" style="color: red;">Supprimer</button>
-                                                    <td> <a class="hover:text-primary cursor-pointer"
-                                                               href="#"
-                                                               data-modal-toggle="#student-modal"
-                                                               data-user='@json($student->user())'
-                                                               onclick="openEditModal(this)">
-                                                                @csrf
-                                                              <button type="button" style="color: green">Modifier</button>
-                                                            </a> </td>
-                                                        </form>
-                                                </div>
-                                            </tr>
+                                            @include('pages.students.student-row')
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -141,10 +121,7 @@
                 document.getElementById('edit-last-name').value = user.last_name;
                 document.getElementById('edit-email').value = user.email;
                 document.getElementById('edit-birth-date').value = user.birth_date;
-                // Dynamique action of form
                 document.getElementById('edit-user-form').action = `{{ route('student.update', ':user_id') }}`.replace(':user_id', user.id);
-
-                // View modal
                 document.getElementById('student-modal').classList.remove('hidden');
             }
         </script>
@@ -158,50 +135,15 @@
                type: "POST",
                data: data,
                    success: function(response) {
-                       console.log('Success response:', response);
-                       let newRow = createStudentRow(response.student);
-                       $('#viewFormStudent').append(newRow); //This code should add a row to the table but it does not appear(Antonin)
-                      // According to the jQuery documentation this should work but it doesn't.
-                       //To fix it i can only refresh the page
-                       location.reload()
+                       let newRow = $(response.dom);
+                       $('#students-table').append(newRow);
+                       $('#formStudent').trigger('reset');
                },
                error:function(){
                    alert("error")
                }
            });
-           console.log(event)
-
-           console.log(data)
         })
-
-       function createStudentRow(student) {
-           return `
-        <tr>
-            <td>${student.last_name}</td>
-            <td>${student.first_name}</td>
-            <td>${student.birth_date}</td>
-            <td>${student.email}</td>
-            <td>
-                <form action="{{ route('student.destroy', $student->user()) }}" method="POST" onsubmit="return confirm('Supprimer cet étudiant ?');">
-                    <input type="hidden" name="_token" value="${$('meta[name="csrf-token"]').attr('content')}">
-                    <button type="submit" style="color: red;">Supprimer</button>
-                </form>
-            </td>
-            <td>
-                <a class="hover:text-primary cursor-pointer"
-                   href="#"
-                   data-modal-toggle="#student-modal"
-                   data-user='${JSON.stringify(student)}'
-                   onclick="openEditModal(this)">
-                   <button type="button" style="color: green">Modifier</button>
-                </a>
-            </td>
-        </tr>
-    `;
-       }
-
-
-
     </script>
 </x-app-layout>
 

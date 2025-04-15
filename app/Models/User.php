@@ -83,4 +83,12 @@ class User extends Authenticatable
             ->first();
     }
 
+    public static function getUsers($role) {
+        return self::leftJoin('users_schools as US', 'US.user_id', '=', 'users.id')
+                        ->where('US.role', $role)
+                        ->where('US.school_id', 1)
+                        ->select('users.*')
+                        ->get();
+    }
+
 }

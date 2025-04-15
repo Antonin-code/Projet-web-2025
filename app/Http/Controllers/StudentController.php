@@ -11,7 +11,7 @@ class StudentController extends Controller
 {
     public function index()
     {
-        $students = UserSchool::where('role', 'student')->get();
+        $students = User::getUsers('student');
         return view('pages.students.index', compact('students' ));
 
     }
@@ -26,9 +26,15 @@ class StudentController extends Controller
         ]);
         $user = User:: create(['last_name' => $request->last_name, 'first_name' => $request->first_name, 'email' => $request->email, 'birth_date' => $request->birth_date, 'password' => $request->email]);
         UserSchool:: create(['user_id' => $user->id, 'school_id' => 1, 'role' => 'student']);
+
+
+        // Generate the view
+        $studentRow = view('pages.students.student-row', ['student' => $user])->render();
+
         return response()->json([
-            'success' => true,
-            'student' => $user
+            'success'   => true,
+            'student'   => $user,
+            'dom'       => $studentRow
         ]);
 
     }
