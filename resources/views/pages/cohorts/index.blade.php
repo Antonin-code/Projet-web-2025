@@ -35,10 +35,16 @@
                                         </th>
                                         <th class="min-w-[135px]">
                                             <span class="sort">
-                                                <span class="sort-label">Etudiants</span>
+                                                <span class="sort-label">Date de début</span>
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
+                                        </th>
+                                        <th class="min-w-[135px]">
+                                            <span class="sort">
+                                                <span class="sort-label">Date de Fin</span>
+                                                <span class="sort-icon"></span>
+                                            </span>
                                         </th>
                                         <th class="min-w-[135px]">
                                         </th>

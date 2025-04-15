@@ -38,6 +38,12 @@
                                             </span>
                                         </th>
                                         <th class="w-[70px]"></th>
+                                        <th class="min-w-[135px]">
+                                        </th>
+                                        <th class="min-w-[135px]">
+                                        </th>
+                                        <th class="min-w-[135px]">
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
