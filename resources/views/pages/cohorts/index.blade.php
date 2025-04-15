@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <div data-datatable="true" data-datatable-page-size="5">
                             <div class="scrollable-x-auto">
-                                <table class="table table-border" data-datatable-table="true">
+                                <table class="table table-border table-with-modal" data-datatable-table="true">
                                     <thead>
                                     <tr>
                                         <th class="min-w-[280px]">
@@ -29,7 +29,7 @@
                                         </th>
                                         <th class="min-w-[135px]">
                                             <span class="sort">
-                                                <span class="sort-label">Année</span>
+                                                <span class="sort-label">Description</span>
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
@@ -66,7 +66,7 @@
                                                             <div class="flex flex-col gap-2">
                                                                 <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
                                                                    href="{{ route('cohort.show', $cohort->id) }}">
-                                                                    {{ $cohort->name }}
+                                                                    {{ $cohort->description }}
                                                                 </a>
                                                                 <span class="text-2sm text-gray-700 font-normal leading-3">
                                                                   {{ $cohort->location ?? 'Not specify' }}
@@ -75,22 +75,17 @@
                                                         </td>
                                                         <td>{{ $cohort->start_date}}</td>
                                                         <td>{{ $cohort->end_date }}</td>
-                                                        <div class="flex items-right justify-between">
-                                                            <td>
-                                                                <form action="{{ route('cohort.destroy', $cohort) }}" method="POST" onsubmit="return confirm('Supprimer cette promotion ?');">
-                                                                    @csrf
-                                                                    <button type="submit" style="color: red;">Supprimer</button>
-                                                                    <td> <a class="hover:text-primary cursor-pointer"
-                                                                            href="#"
-                                                                            data-modal-toggle="#cohort-modal"
-                                                                            data-user='@json($cohort)'
-                                                                            onclick="openEditModal(this)">
-                                                                            @csrf
-                                                                            <button type="button" style="color: green">Modifier</button>
-                                                                        </a> </td>
-                                                                </form>
-                                                        </div>
-
+                                                        <td>
+                                                            <form action="{{ route('cohort.destroy', $cohort) }}" method="POST" onsubmit="return confirm('Supprimer cette promotion ?');">                                                                    @csrf
+                                                                @csrf
+                                                                <button type="submit" style="color: red;">Supprimer</button>
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <a class="open-modal hover:text-primary cursor-pointer"
+                                                               href="#" data-route="{{ route('cohort.form', $cohort) }}"
+                                                               data-modal="#cohort-modal">Modifier</a>
+                                                        </td>
                                                 @endforeach
                                     </tbody>
                                 </table>
@@ -121,17 +116,19 @@
                 <div class="card-body flex flex-col gap-5">
                     <form method="post" action ="{{route('cohort.store')}}">
                         @csrf
-                    <x-forms.input name="name" :label="__('Nom')" />
+                        <x-forms.input name="name" :label="__('Nom')" />
 
-                    <x-forms.input name="description" :label="__('Description')" />
+                        <x-forms.input name="description" :label="__('Description')" />
 
-                    <x-forms.input type="date" name="start_date" :label="('Début de l\'année')"/>
+                        <x-forms.input type="date" name="start_date" :label="('Début de l\'année')"/>
 
-                    <x-forms.input type="date" name="end_date" :label="('Fin de l\'année')"/>
-                    <x-forms.primary-button>
-                        {{ __('Valider') }}
-                    </x-forms.primary-button>
+                        <x-forms.input type="date" name="end_date" :label="('Fin de l\'année')"/>
+                        <x-forms.primary-button>
+                            {{ __('Valider') }}
+                        </x-forms.primary-button>
+                    </form>
                 </div>
+
             </div>
         </div>
     </div>
@@ -142,12 +139,13 @@
             document.getElementById('edit-name').value = cohort.name;
             document.getElementById('edit-description').value = cohort.description;
             document.getElementById('edit-start_date').value = cohort.start_date;
-            document.getElementById('edit-end').value = cohort.end_date;
+            document.getElementById('edit-end_date').value = cohort.end_date;
             // Dynamique action of form
-            document.getElementById('edit-cohort-form').action = `{{ route('cohort.updates', ':user_id') }}`.replace(':user_id', user.id);
+            document.getElementById('edit-cohort-form').action = `{{ route('cohort.updates', 'cohorts') }}`.replace(':cohort.name', cohort.name);
 
             // View modal
             document.getElementById('cohort-modal').classList.remove('hidden');
         }
     </script>
 </x-app-layout>
+@include('pages.cohorts.cohort-modal')

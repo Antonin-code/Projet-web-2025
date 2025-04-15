@@ -47,7 +47,6 @@ class CohortController extends Controller
 
         // Update cohort
         $cohorts->update([
-            'school_id' => 1,
             'name' => $request->name,
             'description' => $request->description,
             'start_date' => $request->start_date,
@@ -61,7 +60,10 @@ class CohortController extends Controller
     public function deleteCohorts(Cohort $cohort)
     {
         $cohort->delete();
-        return redirect('cohort')->with('La promotion a bien été supprimé');
+        $cohorts = Cohort::all();
+        return view('pages.cohorts.index',[
+            'cohorts' => $cohorts
+        ]);
     }
 
     //Function to store cohorts
@@ -83,5 +85,11 @@ class CohortController extends Controller
         ]);
 
         return redirect()->route('cohort.index')->with('success', 'Promotion ajoutée avec succès !');
+    }
+
+    public function getForm(Cohort $cohort) {
+        $dom = view('pages.cohorts.cohort-form', ['cohort' => $cohort])->render();
+
+        return response()->json(['dom' => $dom]);
     }
 }

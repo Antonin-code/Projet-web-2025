@@ -1,4 +1,4 @@
-import './bootstrap';
+import './custom/_modal';
 
 import Alpine from 'alpinejs';
 
