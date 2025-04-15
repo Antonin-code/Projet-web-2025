@@ -74,11 +74,12 @@ Route::middleware('auth')->group(function () {
         Route::post('cohort/{cohort}', [CohortController ::class, 'deleteCohorts'])->name('cohort.destroy');
 
         //route to update cohorts
-        Route::post('/cohorts/{cohort}', [CohortController ::class, 'update'])->name('cohort.updates');
+        Route::put('/cohorts/{cohort}', [CohortController ::class, 'update'])->name('cohort.updates');
 
         //Route to store cohorts
         Route::post('cohort', [CohortController ::class, 'store'])->name('cohort.store');
 
+        //Route to get form for modal
         Route::get('/form/cohort/{cohort}', [CohortController::class, 'getForm'])->name('cohort.form');
 
     });

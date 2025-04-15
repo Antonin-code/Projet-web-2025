@@ -61,7 +61,6 @@
                                                    href="{{ route('cohort.show', $cohort->id )}}">
                                                     {{ $cohort->name }}
                                                 </a>
-
                                                         <td>
                                                             <div class="flex flex-col gap-2">
                                                                 <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
@@ -141,8 +140,8 @@
             document.getElementById('edit-start_date').value = cohort.start_date;
             document.getElementById('edit-end_date').value = cohort.end_date;
             // Dynamique action of form
-            document.getElementById('edit-cohort-form').action = `{{ route('cohort.updates', 'cohorts') }}`.replace(':cohort.name', cohort.name);
-
+            document.getElementById('edit-cohort-form').action = `{{ route('cohort.updates', ':cohorts_id') }}`.replace(':cohorts_id', cohort.id);
+        console.log(cohort)
             // View modal
             document.getElementById('cohort-modal').classList.remove('hidden');
         }

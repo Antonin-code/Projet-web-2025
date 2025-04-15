@@ -7,6 +7,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use function Laravel\Prompts\alert;
 
 class CohortController extends Controller
 {
@@ -52,8 +53,8 @@ class CohortController extends Controller
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
         ]);
+
         // Review
-        return redirect()->back();
     }
 
     //Function to delete cohorts

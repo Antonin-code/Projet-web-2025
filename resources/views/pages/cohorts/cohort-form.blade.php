@@ -1,6 +1,6 @@
-<form id="edit-cohort-form" method="POST" action="{{ route('cohort.updates', $cohort) }}">
+<form id="edit-cohort-form" method="POST" action="{{ route('cohort.updates', $cohort->id) }}">
     @csrf
-
+@method("PUT")
     <div class="mb-4">
         <label for="edit-first-name">Nom</label>
         <input type="text" value="{{ $cohort->name }}" name="name" id="edit-name" class="w-full border px-3 py-2 rounded">
@@ -8,7 +8,7 @@
 
     <div class="mb-4">
         <label for="edit-last-name">Description</label>
-        <input type="text" name="Description" id="edit-Description" class="w-full border px-3 py-2 rounded">
+        <input type="text" value="{{ $cohort->description }}" name="Description" id="edit-Description" class="w-full border px-3 py-2 rounded">
     </div>
 
     <div class="mb-4">
@@ -23,3 +23,9 @@
 
     <button type="submit" class="color">Sauvegarder</button>
 </form>
+
+
+<script>
+
+
+</script>
