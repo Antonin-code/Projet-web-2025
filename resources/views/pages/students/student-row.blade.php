@@ -7,7 +7,7 @@
         <td>
             <form action="{{ route('student.destroy', $student) }}" method="POST" onsubmit="return confirm('Supprimer cet étudiant ?');">
                 @csrf
-                <button type="submit" style="color: red;">Supprimer</button>
+                <button id="suppButton" type="submit" style="color: red;">Supprimer </button>
                 <td> <a class="hover:text-primary cursor-pointer"
                         href="#"
                         data-modal-toggle="#student-modal"
