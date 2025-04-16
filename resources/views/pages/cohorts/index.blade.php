@@ -18,7 +18,7 @@
                     <div class="card-body">
                         <div data-datatable="true" data-datatable-page-size="5">
                             <div class="scrollable-x-auto">
-                                <table class="table table-border" data-datatable-table="true">
+                                <table class="table table-border table-with-modal" data-datatable-table="true">
                                     <thead>
                                     <tr>
                                         <th class="min-w-[280px]">
@@ -29,34 +29,63 @@
                                         </th>
                                         <th class="min-w-[135px]">
                                             <span class="sort">
-                                                <span class="sort-label">Année</span>
+                                                <span class="sort-label">Description</span>
                                                 <span class="sort-icon"></span>
                                             </span>
                                         </th>
                                         <th class="min-w-[135px]">
                                             <span class="sort">
-                                                <span class="sort-label">Etudiants</span>
+                                                <span class="sort-label">Date de début</span>
                                                 <span class="sort-icon"></span>
                                             </span>
+                                        </th>
+                                        </th>
+                                        <th class="min-w-[135px]">
+                                            <span class="sort">
+                                                <span class="sort-label">Date de Fin</span>
+                                                <span class="sort-icon"></span>
+                                            </span>
+                                        </th>
+                                        <th class="min-w-[135px]">
+                                        </th>
+                                        <th class="min-w-[135px]">
                                         </th>
                                     </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($cohorts as $cohort)
                                         <tr>
                                         <td>
                                             <div class="flex flex-col gap-2">
                                                 <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
-                                                   href="{{ route('cohort.show', 1) }}">
-                                                    Promotion B1
+                                                   href="{{ route('cohort.show', $cohort->id )}}">
+                                                    {{ $cohort->name }}
                                                 </a>
-                                                <span class="text-2sm text-gray-700 font-normal leading-3">
-                                                    Cergy
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td>2024-2025</td>
-                                        <td>34</td>
-                                    </tr>
+                                                        <td>
+                                                            <div class="flex flex-col gap-2">
+                                                                <a class="leading-none font-medium text-sm text-gray-900 hover:text-primary"
+                                                                   href="{{ route('cohort.show', $cohort->id) }}">
+                                                                    {{ $cohort->description }}
+                                                                </a>
+                                                                <span class="text-2sm text-gray-700 font-normal leading-3">
+                                                                  {{ $cohort->location ?? 'Not specify' }}
+                                                              </span>
+                                                            </div>
+                                                        </td>
+                                                        <td>{{ $cohort->start_date}}</td>
+                                                        <td>{{ $cohort->end_date }}</td>
+                                                        <td>
+                                                            <form action="{{ route('cohort.destroy', $cohort) }}" method="POST" onsubmit="return confirm('Supprimer cette promotion ?');">                                                                    @csrf
+                                                                @csrf
+                                                                <button type="submit" style="color: red;">Supprimer</button>
+                                                            </form>
+                                                        </td>
+                                                        <td>
+                                                            <a class="open-modal hover:text-primary cursor-pointer"
+                                                               href="#" data-route="{{ route('cohort.form', $cohort) }}"
+                                                               data-modal="#cohort-modal">Modifier</a>
+                                                        </td>
+                                                @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -84,20 +113,38 @@
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">
-                    <x-forms.input name="name" :label="__('Nom')" />
+                    <form method="post" action ="{{route('cohort.store')}}">
+                        @csrf
+                        <x-forms.input name="name" :label="__('Nom')" />
 
-                    <x-forms.input name="description" :label="__('Description')" />
+                        <x-forms.input name="description" :label="__('Description')" />
 
-                    <x-forms.input type="date" name="year" :label="__('Début de l\'année')" placeholder="" />
+                        <x-forms.input type="date" name="start_date" :label="('Début de l\'année')"/>
 
-                    <x-forms.input type="date" name="year" :label="__('Fin de l\'année')" placeholder="" />
-
-                    <x-forms.primary-button>
-                        {{ __('Valider') }}
-                    </x-forms.primary-button>
+                        <x-forms.input type="date" name="end_date" :label="('Fin de l\'année')"/>
+                        <x-forms.primary-button>
+                            {{ __('Valider') }}
+                        </x-forms.primary-button>
+                    </form>
                 </div>
+
             </div>
         </div>
     </div>
-    <!-- end: grid -->
+    <script>
+        //Javascript to have informations in modal
+        function openEditModal(element) {
+            const cohort = JSON.parse(element.dataset.cohort);
+            document.getElementById('edit-name').value = cohort.name;
+            document.getElementById('edit-description').value = cohort.description;
+            document.getElementById('edit-start_date').value = cohort.start_date;
+            document.getElementById('edit-end_date').value = cohort.end_date;
+            // Dynamique action of form
+            document.getElementById('edit-cohort-form').action = `{{ route('cohort.updates', ':cohorts_id') }}`.replace(':cohorts_id', cohort.id);
+        console.log(cohort)
+            // View modal
+            document.getElementById('cohort-modal').classList.remove('hidden');
+        }
+    </script>
 </x-app-layout>
+@include('pages.cohorts.cohort-modal')

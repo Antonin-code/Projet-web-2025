@@ -7,6 +7,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
+use function Laravel\Prompts\alert;
 
 class CohortController extends Controller
 {
@@ -16,8 +17,10 @@ class CohortController extends Controller
      */
     public function index()
     {
-        return view('pages.cohorts.index');
+        $cohorts = Cohort::all();
+        return view('pages.cohorts.index', compact('cohorts' ));
     }
+
 
 
     /**
@@ -34,10 +37,9 @@ class CohortController extends Controller
     }
 
     //function to update users
-    public function update(Request $request, Cohort $cohort)
+    public function update(Request $request, Cohort $cohorts)
     {
         $request->validate([
-            'school_id' => 'required|int|max:255',
             'name' => 'required|string|max:255',
             'description' => 'required|string|max:255',
             'start_date' => 'required|date',
@@ -45,36 +47,50 @@ class CohortController extends Controller
         ]);
 
         // Update cohort
-        $cohort->update([
-            'school_id' => $request->school_id,
+        $cohorts->update([
             'name' => $request->name,
             'description' => $request->description,
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
         ]);
+
         // Review
-        return redirect()->back();
     }
 
     //Function to delete cohorts
     public function deleteCohorts(Cohort $cohort)
     {
         $cohort->delete();
-        return redirect('cohort')->with('La promotion a bien été supprimé');
+        $cohorts = Cohort::all();
+        return view('pages.cohorts.index',[
+            'cohorts' => $cohorts
+        ]);
     }
 
     //Function to store cohorts
     public function store(Request $request)
     {
-        $request->validate([
-            'school_id' => 'required|string|max:100',
-            'name' => 'required|email|max:100',
-            'description' => 'required|email|max:100',
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
             'start_date' => 'required|date',
-            'end_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
         ]);
-        $user = Cohort:: create([ 'school_id' => $request->school_id, 'name' => $request->name,'description' => $request->description, 'start_date' => $request->start_date, 'end_date' => $request->end_date]);
-        return redirect()->route('cohort.index')->with('Terminé !', 'Promotion crée avec succes');
 
+        Cohort::create([
+            'school_id' => 1,
+            'name' => $validated['name'],
+            'description' => $validated['description'],
+            'start_date' => $validated['start_date'],
+            'end_date' => $validated['end_date'],
+        ]);
+
+        return redirect()->route('cohort.index')->with('success', 'Promotion ajoutée avec succès !');
+    }
+
+    public function getForm(Cohort $cohort) {
+        $dom = view('pages.cohorts.cohort-form', ['cohort' => $cohort])->render();
+
+        return response()->json(['dom' => $dom]);
     }
 }
