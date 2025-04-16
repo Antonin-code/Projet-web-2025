@@ -1,62 +1,78 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
-
+use Illuminate\Support\Facades\Hash;
 class ProfileController extends Controller
+
 {
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit()
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        return view('profile.edit');
     }
 
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request)
     {
-        $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
-    }
-
-    /**
-     * Delete the user's account.
-     */
-
-   //Function to destroy user profile
-    public function destroy(Request $request): RedirectResponse
-    {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
+        $request->validate([
+            'email' => 'required|email|unique:users,email,' . Auth::id(),
+            'password' => 'nullable|min:8|confirmed',
+            'photo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $user = $request->user();
+        $user = Auth::user();
 
-        Auth::logout();
+        if ($request->has('email')) {
+            $user->email = $request->email;
+        }
 
-        $user->delete();
+        // update the password
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
 
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        // update picture
+        if ($request->hasFile('photo')) {
+            if ($user->photo && Storage::exists($user->photo)) {   //Destroy picture if existing
+                Storage::delete($user->photo);
+            }
 
-        return Redirect::to('/'); //redirect
+            // save new picture
+            $user->photo = $request->file('photo')->store('profile_photos');
+        }
+
+        // save modifs
+        $user->save();
+
+        return redirect()->route('profile.edit')->with('success', 'Profil mis à jour avec succès.');
     }
-}
+
+
+    //Function to delete user by himself
+public function destroy()
+{
+    $user = Auth::user();
+
+    // delete picture if already exist
+    if ($user->photo && Storage::exists($user->photo)) {
+        Storage::delete($user->photo);
+    }
+
+
+    $user->delete();
+
+    // after delete logout
+    Auth::logout();
+
+}}

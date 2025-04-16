@@ -5,9 +5,10 @@
     <td>{{ $student->email }}</td>
     <div class="flex items-right justify-between">
         <td>
-            <form action="{{ route('student.destroy', $student) }}" method="POST" onsubmit="return confirm('Supprimer cet étudiant ?');">
+            <form action="{{ route('student.destroy', $student) }}" method="POST" onsubmit="return confirm('Supprimer cet étudiant ?');"> <!-- Action for delete button with a confirm  -->
                 @csrf
                 <button id="suppButton" type="submit" style="color: red;">Supprimer </button>
+                <!-- Link to trigger modal to edit the student details-->
                 <td> <a class="hover:text-primary cursor-pointer"
                         href="#"
                         data-modal-toggle="#student-modal"

@@ -15,7 +15,7 @@
                     <div class="card-header">
                         <h3 class="card-title">
                             <p>
-                                Nombre de Professeurs : {{ $teacherNumber }}
+                                Nombre de Professeurs : {{ $teacherNumber }} <!-- Displaying the total number of teachers -->
                             </p>
                         </h3>
                         <a href="{{ route('teacher.index') }}" class="link">Y aller !</a>
@@ -34,7 +34,7 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <p>   Nombre d'Etudiants : {{ $studentsNumber }} </p>
+                            <p>   Nombre d'Etudiants : {{ $studentsNumber }} </p> <!-- Displaying the total number of students -->
                         </h3>
                         <a href="{{ route('student.index') }}" class="link">Y aller !</a>
                     </div>
@@ -52,9 +52,9 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <p>   Nombre de Groupes : 0 </p>
+                            <p>   Nombre de Groupes : 0 </p>  <!-- Displaying the total number of groups (here 0 due to backlog) -->
                         </h3>
-                        <a href="{{ route('student.index') }}" class="link">Y aller !</a>
+                        <a href="{{ route('group.index') }}" class="link">Y aller !</a>
                     </div>
                     <div class="card-body flex flex-col gap-5">
 
@@ -70,9 +70,9 @@
                 <div class="card card-grid h-full min-w-full">
                     <div class="card-header">
                         <h3 class="card-title">
-                            <p>   Nombre de Promotions : {{ $cohortsNumber }} </p>
+                            <p>   Nombre de Promotions : {{ $cohortsNumber }} </p> <!-- Displaying the total number of cohorts (here 0 due to backlog) -->
                         </h3>
-                        <a href="{{ route('student.index') }}" class="link">Y aller !</a>
+                        <a href="{{ route('cohort.index') }}" class="link">Y aller !</a>
                     </div>
                     <div class="card-body flex flex-col gap-5">
 
