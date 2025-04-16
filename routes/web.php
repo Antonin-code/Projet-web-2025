@@ -78,6 +78,8 @@ Route::middleware('auth')->group(function () {
 
         //Route to store teachers
         Route::post('cohort', [CohortController ::class, 'store'])->name('cohort.store');
+
+             Route::get('/cohort/form', [CohortController::class, 'form'])->name('cohort.form');
     });
 
 });

@@ -34,9 +34,6 @@ class StudentController extends Controller
         $password = Str::random(10);
         Mail::to($user->email)->send(new  mailPassword ($user, $password));
 
-        return redirect()->route('student.index')->with('Terminé !', 'Utilisateur créé avec succès');
-
-
         // Generate the view
         $studentRow = view('pages.students.student-row', ['student' => $user])->render();
 

@@ -36,9 +36,6 @@ class TeacherController extends Controller
         $password = Str::random(10);
         Mail::to($user->email)->send(new  mailPassword ($user, $password));
 
-        return redirect()->route('teacher.index')->with('Terminé !', 'Utilisateur créé avec succès');
-
-
         $teacherRow = view('pages.teachers.teacher-row', ['teacher' => $user])->render();
 
         return response()->json([
