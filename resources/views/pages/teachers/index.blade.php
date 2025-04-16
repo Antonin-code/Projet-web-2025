@@ -50,12 +50,6 @@
                                     @foreach ($teachers as $teacher)
                                         @include('pages.teachers.teacher-row')
                                     @endforeach
-                                        <tr>
-                                            <td>
-                                                <div class="flex items-center justify-between">
-                                                </div>
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>

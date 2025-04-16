@@ -10,7 +10,7 @@
                 <button type="submit" style="color: red;">Supprimer</button>
                 <td> <a class="hover:text-primary cursor-pointer"
                         href="#"
-                        data-modal-toggle="#student-modal"
+                        data-modal-toggle="#teacher-modal"
                         data-user='@json($teacher)'
                         onclick="openEditModal(this)">
                         @csrf
