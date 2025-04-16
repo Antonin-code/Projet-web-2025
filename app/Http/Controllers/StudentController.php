@@ -27,12 +27,12 @@ class StudentController extends Controller
             'email' => 'required|email|max:100',
             'birth_date' => 'required|date',
         ]);
-        $user = User:: create(['last_name' => $request->last_name, 'first_name' => $request->first_name, 'email' => $request->email, 'birth_date' => $request->birth_date, 'password' => $request->email]);
-        UserSchool:: create(['user_id' => $user->id, 'school_id' => 1, 'role' => 'student']);
+        $user = User:: create(['last_name' => $request->last_name, 'first_name' => $request->first_name, 'email' => $request->email, 'birth_date' => $request->birth_date, 'password' => $request->email]); //create student with attributes in user table
+        UserSchool:: create(['user_id' => $user->id, 'school_id' => 1, 'role' => 'student']);  //create student with attributes in user_school table
 
 
-        $password = Str::random(10);
-        Mail::to($user->email)->send(new  mailPassword ($user, $password));
+        $password = Str::random(10); //create a random password with 10 characters
+        Mail::to($user->email)->send(new  mailPassword ($user, $password));  //send mail to user
 
         $studentRow = view('pages.students.student-row', ['student' => $user])->render();
 

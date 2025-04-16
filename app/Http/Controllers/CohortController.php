@@ -36,7 +36,7 @@ class CohortController extends Controller
         ]);
     }
 
-    //function to update users
+    //function to update cohorts
     public function update(Request $request, Cohort $cohorts)
     {
         $request->validate([
@@ -53,8 +53,6 @@ class CohortController extends Controller
             'start_date' => $request->start_date,
             'end_date' => $request->end_date,
         ]);
-
-        // Review
     }
 
     //Function to delete cohorts
@@ -85,9 +83,10 @@ class CohortController extends Controller
             'end_date' => $validated['end_date'],
         ]);
 
-        return redirect()->route('cohort.index')->with('success', 'Promotion ajoutée avec succès !');
+        return redirect()->route('cohort.index')->with('success', 'Promotion ajoutée avec succès !'); //redirect in route
     }
 
+    //route to get the formulary
     public function getForm(Cohort $cohort) {
         $dom = view('pages.cohorts.cohort-form', ['cohort' => $cohort])->render();
 

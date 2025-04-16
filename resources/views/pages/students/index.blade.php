@@ -53,11 +53,9 @@
                                         </th>
                                         <th class="min-w-[135px]">
                                         </th>
-
                                     </tr>
                                     </thead>
                                     <tbody id="viewFormStudent">
-
                                         @foreach ($students as $student)
                                             @include('pages.students.student-row')
                                         @endforeach

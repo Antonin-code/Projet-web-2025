@@ -19,11 +19,11 @@ class DashboardController extends Controller
         $cohortsNumber = null;
       //  $groupsNumber = null; //Dont need here du to backlog instructions
 
-
+        // Check if the user's role is either "admin" or "teacher"
         if (in_array($userRole, ['admin', 'teacher'])) {
-            $studentsNumber = UserSchool::where('role', 'student')->count();
-            $teacherNumber = UserSchool::where('role', 'teacher')->count();
-            $cohortsNumber = Cohort::count();
+            $studentsNumber = UserSchool::where('role', 'student')->count();     // Count the number of students in the "user_school" table
+            $teacherNumber = UserSchool::where('role', 'teacher')->count();      // Count the number of teachers in the "user_school" table
+            $cohortsNumber = Cohort::count();                                    // Count the total number of cohorts
            // $groupsNumber = Groups::count(); //Dont need here du to backlog instructions
         }
 

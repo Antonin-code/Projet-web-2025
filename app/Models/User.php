@@ -83,6 +83,7 @@ class User extends Authenticatable
             ->first();
     }
 
+    // Function to retrieve users based on their role in a specific school
     public static function getUsers($role) {
         return self::leftJoin('users_schools as US', 'US.user_id', '=', 'users.id')
                         ->where('US.role', $role)

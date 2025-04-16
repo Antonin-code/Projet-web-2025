@@ -47,39 +47,35 @@ Route::middleware('auth')->group(function () {
         // Common life
         Route::get('common-life', [CommonLifeController::class, 'index'])->name('common-life.index');
 
-        //Route to store students
-        Route::post('students', [StudentController::class, 'store'])->name('student.store');
-
         //route to do the formular
         Route::view('formulaire', 'index.blade');
 
-        //route to show students
 
+        //Students
         //route to destroy students
         Route::post('students/{student}', [StudentController::class, 'deleteStudents'])->name('student.destroy');
-
         //route to update students
         Route::put('/users/{user}', [StudentController::class, 'update'])->name('student.update');
+        //Route to store students
+             Route::post('students', [StudentController::class, 'store'])->name('student.store');
 
+
+        //Teachers
         //route to destroy teacher
         Route::post('teacher/{teacher}', [TeacherController::class, 'deleteTeachers'])->name('teacher.destroy');
-
         //route to update teacher
         Route::put('/teachers/{teachers}', [TeacherController::class, 'updateTeacher'])->name('teacher.update');
-
         //Route to store teachers
         Route::post('teacher', [TeacherController::class, 'store'])->name('teacher.store');
 
-        //route to destroy cohorts
+
+        //Cohorts
+        //route to update cohort
+             Route::put('/user/{user}', [CohortController ::class, 'updateCohorts'])->name('cohort.updates');
+             //route to destroy cohorts
         Route::post('cohort/{cohort}', [CohortController ::class, 'deleteCohorts'])->name('cohort.destroy');
-
-        //route to update teacher
-        Route::put('/user/{user}', [CohortController ::class, 'updateCohorts'])->name('cohort.updates');
-
-        //Route to store teachers
+        //Route to store cohort
         Route::post('cohort', [CohortController ::class, 'store'])->name('cohort.store');
-
-
         //Route to view cohort form
              Route::get('/cohort/form', [CohortController::class, 'form'])->name('cohort.form');
     });

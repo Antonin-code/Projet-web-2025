@@ -136,18 +136,13 @@
     </div>
     <script>
         function openEditModal(element) {
-            console.log("Modal triggered"); // test
             const cohort = JSON.parse(element.getAttribute('data-cohort'));
-            console.log(cohort); // test
-
             document.getElementById('edit_name').value = cohort.name;
             document.getElementById('edit_description').value = cohort.description;
             document.getElementById('edit_start_date').value = cohort.start_date;
             document.getElementById('edit_end_date').value = cohort.end_date;
-
             const form = document.getElementById('edit_user_form');
             form.action = `/cohorts/${cohort.id}`;
-
             document.getElementById('cohort-modal').classList.remove('hidden');
         }
     </script>
