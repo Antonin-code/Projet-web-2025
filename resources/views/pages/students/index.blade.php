@@ -134,10 +134,11 @@
                url: "{{route('student.store')}}",
                type: "POST",
                data: data,
-                   success: function(response) {
-                       let newRow = $(response.dom);
-                       $('#students-table').append(newRow);
-                       $('#formStudent').trigger('reset');
+               success: function(response) {
+                   console.log('Success response:', response);
+                   let newRow = $(response.dom);
+                   $('#students-table').append(newRow);
+                   $('#formStudent').trigger('reset');
                },
                error:function(){
                    alert("error")

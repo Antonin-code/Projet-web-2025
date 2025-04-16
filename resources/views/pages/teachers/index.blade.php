@@ -135,9 +135,6 @@
                     alert("error")
                 }
             });
-            console.log(event)
-
-            console.log(data)
         })
 
     </script>

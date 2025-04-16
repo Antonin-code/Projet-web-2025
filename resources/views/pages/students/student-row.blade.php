@@ -15,7 +15,10 @@
                         onclick="openEditModal(this)">
                         @csrf
                         <button type="button" style="color: green">Modifier</button>
-                    </a> </td>
+                    </a>
+                </td>
             </form>
+        </td>
     </div>
+
 </tr>
