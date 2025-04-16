@@ -17,11 +17,11 @@ Route::redirect('/', 'dashboard');
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::middleware('verified')->group(function () {
+         Route::middleware('verified')->group(function () {
         // Dashboard
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -73,10 +73,10 @@ Route::middleware('auth')->group(function () {
         //route to destroy cohorts
         Route::post('cohort/{cohort}', [CohortController ::class, 'deleteCohorts'])->name('cohort.destroy');
 
-        //route to update cohorts
+        //route to update teacher
         Route::put('/user/{user}', [CohortController ::class, 'updateCohorts'])->name('cohort.updates');
 
-        //Route to store cohorts
+        //Route to store teachers
         Route::post('cohort', [CohortController ::class, 'store'])->name('cohort.store');
     });
 
