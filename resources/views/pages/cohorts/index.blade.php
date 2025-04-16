@@ -81,9 +81,12 @@
                                                             </form>
                                                         </td>
                                                         <td>
-                                                            <a class="open-modal hover:text-primary cursor-pointer"
-                                                               href="#" data-route="{{ route('cohort.form', $cohort) }}"
-                                                               data-modal="#cohort-modal">Modifier</a>
+                                                            <a onclick="openEditModal(this)"
+                                                               href="#"
+                                                               data-cohort='@json($cohort)'
+                                                               class="hover:text-primary cursor-pointer">
+                                                                Modifier
+                                                            </a>
                                                         </td>
                                                 @endforeach
                                     </tbody>
@@ -132,17 +135,19 @@
         </div>
     </div>
     <script>
-        //Javascript to have informations in modal
         function openEditModal(element) {
-            const cohort = JSON.parse(element.dataset.cohort);
-            document.getElementById('edit-name').value = cohort.name;
-            document.getElementById('edit-description').value = cohort.description;
-            document.getElementById('edit-start_date').value = cohort.start_date;
-            document.getElementById('edit-end_date').value = cohort.end_date;
-            // Dynamique action of form
-            document.getElementById('edit-cohort-form').action = `{{ route('cohort.updates', ':cohorts_id') }}`.replace(':cohorts_id', cohort.id);
-        console.log(cohort)
-            // View modal
+            console.log("Modal triggered"); // test
+            const cohort = JSON.parse(element.getAttribute('data-cohort'));
+            console.log(cohort); // test
+
+            document.getElementById('edit_name').value = cohort.name;
+            document.getElementById('edit_description').value = cohort.description;
+            document.getElementById('edit_start_date').value = cohort.start_date;
+            document.getElementById('edit_end_date').value = cohort.end_date;
+
+            const form = document.getElementById('edit_user_form');
+            form.action = `/cohorts/${cohort.id}`;
+
             document.getElementById('cohort-modal').classList.remove('hidden');
         }
     </script>
