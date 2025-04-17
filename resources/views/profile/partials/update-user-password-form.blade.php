@@ -4,9 +4,6 @@
             Password
         </h3>
     </div>
-    <form method="POST" action="{{ route('password.update') }}">
-        @csrf
-        @method('PATCH')
     <div class="card-body grid gap-5">
         <div class="w-full">
             <div class="flex items-baseline flex-wrap lg:flex-nowrap gap-2.5">
