@@ -91,5 +91,8 @@ class User extends Authenticatable
                         ->select('users.*')
                         ->get();
     }
-
+    public function userschool()
+    {
+        return $this->hasMany(UserSchool::class);
+    }
 }

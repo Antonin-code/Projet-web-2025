@@ -78,19 +78,11 @@ Route::middleware('auth')->group(function () {
         Route::post('cohort', [CohortController ::class, 'store'])->name('cohort.store');
         //Route to view cohort form
              Route::get('/cohort/form', [CohortController::class, 'form'])->name('cohort.form');
+             Route::post('/cohort/{cohort}/add', [CohortController::class, 'cohortAdd'])->name('cohort.add');
+             Route::post('/cohort/{id}/del', [CohortController::class, 'cohortDel'])->name('cohort.del');
 
 
-               //routes to update profile
-                // The auth middleware group ensures that these routes are only accessible to authenticated users
-                Route::middleware(['auth'])->group(function () {
-                 // Display the profile edit form:
-                 Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-                 // Route to Update the profile:
-                 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
-                 // Route to Delete the user account:
-                 Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-             });
-    });
+         });
 
 });
 

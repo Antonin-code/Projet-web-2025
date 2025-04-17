@@ -41,14 +41,23 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                        <td>Doe</td>
-                                        <td>John</td>
-                                        <td>10/02/2000</td>
-                                        <td class="cursor-pointer pointer">
-                                            <i class="ki-filled ki-trash"></i>
-                                        </td>
-                                    </tr>
+
+                                        @foreach($students as $student)
+                                            <tr>
+                                                <td>{{ $student->last_name }}</td>
+                                                <td>{{ $student->first_name }}</td>
+                                                <td>{{ $student->birth_date }}</td>
+                                                <td class="cursor-pointer pointer">
+                                                    <form action="{{route("cohort.del",$student->id)}}" method="POST" onsubmit="return confirm('Voulez vous vraiment supprimer cet etudiant de la promotion ?')">
+                                                        @csrf
+                                                        <button type="submit" >
+                                                            <i class="ki-filled ki-trash" ></i>
+                                                        </button>
+
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -76,13 +85,20 @@
                     </h3>
                 </div>
                 <div class="card-body flex flex-col gap-5">
-                    <x-forms.dropdown name="user_id" :label="__('Etudiant')">
-                        <option value="1">Etudiant 1</option>
-                    </x-forms.dropdown>
+                    <form action="{{route('cohort.add',$cohort)}}"  method="POST" >
+                        @csrf
+                        <x-forms.dropdown name="user_id" :label="__('Etudiant')">
+                            @foreach($users as $user)
+                                <option value="{{ $user->id }}">{{ $user->last_name }} {{ $user->first_name }}</option>
+                            @endforeach
+                        </x-forms.dropdown>
 
-                    <x-forms.primary-button>
-                        {{ __('Valider') }}
-                    </x-forms.primary-button>
+
+                        <x-forms.primary-button>
+                            {{ __('Valider') }}
+                        </x-forms.primary-button>
+                    </form>
+
                 </div>
             </div>
         </div>

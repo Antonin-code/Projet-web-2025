@@ -131,9 +131,6 @@
                     $('#teacher-table').append(newRow);
                     $('#formTeacher').trigger('reset');
                 },
-                error:function(){
-                    alert("error")
-                }
             });
         })
 

@@ -1,74 +1,57 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Modifier mon profil') }}
+            {{ __('Profile') }}
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    @if(session('status'))
-                        <div class="text-green-500 mb-4 p-4 bg-green-100 rounded-md">
-                            {{ session('status') }}
+    <div class="flex grow gap-5 lg:gap-7.5">
+        <div class="hidden lg:block w-[230px] shrink-0">
+            <div class="w-[230px]" data-sticky="true" data-sticky-animation="true" data-sticky-class="fixed z-[4] left-auto top-[3rem]" data-sticky-name="scrollspy" data-sticky-offset="200" data-sticky-target="#scrollable_content">
+                <div class="flex flex-col grow relative before:absolute before:left-[11px] before:top-0 before:bottom-0 before:border-l before:border-gray-200" data-scrollspy="true" data-scrollspy-offset="80px|lg:110px" data-scrollspy-target="#scrollable_content">
+                    <a class="flex items-center rounded-lg pl-2.5 pr-2.5 py-2.5 gap-1.5 active border border-transparent text-2sm text-gray-800 hover:text-primary hover:font-medium scrollspy-active:bg-secondary-active scrollspy-active:text-primary scrollspy-active:font-medium dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg dark:scrollspy-active:bg-coal-300 dark:scrollspy-active:border-gray-100" data-scrollspy-anchor="true" href="#basic_settings">
+             <span class="flex w-1.5 relative before:absolute before:top-0 before:size-1.5 before:rounded-full before:-translate-x-2/4 before:-translate-y-2/4 scrollspy-active:before:bg-primary">
+             </span>
+                        Basic Settings
+                    </a>
+                    <div class="flex flex-col">
+                        <div class="pl-6 pr-2.5 py-2.5 text-2sm font-semibold text-gray-900">
+                            Authentication
                         </div>
-                    @endif
+                        <div class="flex flex-col">
+                            <a class="flex items-center rounded-lg pl-2.5 pr-2.5 py-2.5 gap-3.5 border border-transparent text-2sm text-gray-800 hover:text-primary hover:font-medium scrollspy-active:bg-secondary-active scrollspy-active:text-primary scrollspy-active:font-medium dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg dark:scrollspy-active:bg-coal-300 dark:scrollspy-active:border-gray-100" data-scrollspy-anchor="true" href="#auth_email">
+               <span class="flex w-1.5 relative before:absolute before:top-0 before:size-1.5 before:rounded-full before:-translate-x-2/4 before:-translate-y-2/4 scrollspy-active:before:bg-primary">
+               </span>
+                                Email
+                            </a>
 
-                    <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
 
-                        <!-- Div to modify email-->
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
-                            <input type="email" name="email" id="email" value="{{ old('email', Auth::user()->email) }}" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2" required>
+                            <a class="flex items-center rounded-lg pl-2.5 pr-2.5 py-2.5 gap-3.5 border border-transparent text-2sm text-gray-800 hover:text-primary hover:font-medium scrollspy-active:bg-secondary-active scrollspy-active:text-primary scrollspy-active:font-medium dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg dark:scrollspy-active:bg-coal-300 dark:scrollspy-active:border-gray-100" data-scrollspy-anchor="true" href="#auth_password">
+               <span class="flex w-1.5 relative before:absolute before:top-0 before:size-1.5 before:rounded-full before:-translate-x-2/4 before:-translate-y-2/4 scrollspy-active:before:bg-primary">
+               </span>
+                                Password
+                            </a>
                         </div>
-
-                        <!-- Div to modify password-->
-                        <div class="mt-4">
-                            <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
-                            <input type="password" name="password" id="password" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="pl-6 pr-2.5 py-2.5 text-2sm font-semibold text-gray-900">
+                            Advanced Settings
                         </div>
-
-                        <!-- Div to confirm modify password-->
-                        <div class="mt-4">
-                            <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Confirmer le mot de passe</label>
-                            <input type="password" name="password_confirmation" id="password_confirmation" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
+                        <div class="flex flex-col">
+                            <a class="flex items-center rounded-lg pl-2.5 pr-2.5 py-2.5 gap-1.5 border border-transparent text-2sm text-gray-800 hover:text-primary hover:font-medium scrollspy-active:bg-secondary-active scrollspy-active:text-primary scrollspy-active:font-medium dark:hover:bg-coal-300 dark:hover:border-gray-100 hover:rounded-lg dark:scrollspy-active:bg-coal-300 dark:scrollspy-active:border-gray-100" data-scrollspy-anchor="true" href="#delete_account">
+             <span class="flex w-1.5 relative before:absolute before:top-0 before:size-1.5 before:rounded-full before:-translate-x-2/4 before:-translate-y-2/4 scrollspy-active:before:bg-primary">
+             </span>
+                                Delete Account
+                            </a>
                         </div>
-
-                        <!-- Div to modify profile photo -->
-                        <div class="mt-4">
-                            <label for="photo" class="block text-sm font-medium text-gray-700">Photo de profil</label>
-                            <input type="file" name="photo" id="photo" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2">
-                        </div>
-
-                        <div class="mt-6">
-                            <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                                Mettre à jour le profil
-                            </button>
-                        </div>
-                    </form>
-
-                    <!-- Delete account-->
-                    <form action="{{ route('profile.destroy') }}" method="POST" class="mt-6">
-                        @csrf
-                        @method('DELETE')
-
-                        <!-- Confirm delete to be sure -->
-                        <div class="mt-4">
-                            <label for="confirmation" class="block text-sm font-medium text-red-500">
-                                Pour supprimer votre compte, tapez "supprimer" dans ce champ :
-                            </label>
-                            <input type="text" name="confirmation" id="confirmation" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 p-2" required>
-                        </div>
-
-                        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50">
-                            Supprimer mon compte
-                        </button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="flex flex-col items-stretch grow gap-5 lg:gap-7.5">
+            @include('profile.partials.update-profile-information-form')
+            @include('profile.partials.update-user-email-form')
+            @include('profile.partials.update-user-password-form')
+            @include('profile.partials.delete-user-form')
+        </div>
 </x-app-layout>

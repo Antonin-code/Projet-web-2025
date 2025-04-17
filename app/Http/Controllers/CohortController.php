@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cohort;
+use App\Models\User;
+use App\Models\UserSchool;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Foundation\Application;
@@ -31,8 +33,17 @@ class CohortController extends Controller
     public function show(Cohort $cohort)
     {
 
+        $students = User::whereHas('userschool', function ($query) use ($cohort) {
+            $query ->where('cohort_id', $cohort->id);
+        })->get();
+
+
+        $Users = User ::whereHas('UserSchool', function ($query) {
+            $query -> where('users_schools.role', 'student');
+        }) -> get();
+
         return view('pages.cohorts.show', [
-            'cohort' => $cohort
+            'cohort' => $cohort, 'users' => $Users , 'students' => $students
         ]);
     }
 
@@ -92,4 +103,33 @@ class CohortController extends Controller
 
         return response()->json(['dom' => $dom]);
     }
+
+    public function cohortAdd(Request $request , Cohort $cohort) {
+
+        $userSchool = UserSchool::where('user_id', $request-> user_id)
+        -> first();
+
+        if ($userSchool) {
+            $userSchool->update([
+                'cohort_id' => $cohort->id,
+            ]);
+        }
+
+
+
+       return back();
+    }
+
+    public function cohortDel($id) {
+
+        $userSchool = UserSchool::where('user_id', $id)
+            -> first();
+
+        if ($userSchool) {
+            $userSchool->update([
+                'cohort_id' => null,
+            ]);
+        }
+        return back();
+}
 }
