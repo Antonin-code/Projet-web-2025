@@ -1,100 +1,36 @@
 # 🚀 Coding Tool Box – Guide d'installation
 
 Bienvenue dans **Coding Tool Box**, un outil complet de gestion pédagogique conçu pour la Coding Factory.  
-Ce projet Laravel inclut la gestion des groupes, promotions, étudiants, rétro (Kanban), QCM  dynamiques, et bien plus.
+Ce projet Laravel inclut la gestion des enseignats, des etudiants ainsi que des promotions. 
 
----
+Avancée des storys : 
 
-## 📦 Prérequis
+Us 1 : La story a été entièrement faite 
+Us 2 : Manque de temps la story n'a pas été commencée 
+Us 3 : Story entièrement faite avec AJAX lorsque l'admin enregistre un étudiant mais je n'ai pas réussi a mettre l'AJAX sur les boutons modifier et supprimer.
+Us 4 : Story entièrement faite avec AJAX lorsque l'admin enregistre une promotion mais je n'ai pas réussi a modifier la promotion ainsi qu'a mettre l'AJAX sur le bouton  supprimer lors de l'ajout de la promotion.
+Us 5 : Story entièrement faite avec AJAX lorsque l'admin enregistre un enseignant mais je n'ai pas réussi a mettre l'AJAX sur les boutons modifier et supprimer.
+Us 6 : Story commencée : l'utilisateur peut modifier son adresse email et supprimer son compte. Pour l'instsant celui ci ne peut pas changer sa photo de profil ni son mot de passe. 
 
-Assurez-vous d’avoir les éléments suivants installés sur votre machine :
 
-- PHP ≥ 8.1
-- Composer
-- MySQL ou MariaDB
-- Node.js + npm (pour les assets frontend si nécessaire)
-- Laravel CLI (`composer global require laravel/installer`)
+Description du projet :
 
----
+Admins : 
+Pour les utilisateurs connectés en tant qu'admins, ceux-ci arrivent dans un premier temps sur la page principale où ils peuvent voir le nombre d'etudiants d'enseignants ansi que de promotions.
 
-## ⚙️ Installation du projet
+En allant sur la page des étudiants, les admins peuvent ajouter un nouvel etudiant en lui ajoutant un nom un prenom ainsi qu'une adresse email et une date de naissance. Une fois fait les etudians ajoutés se retrouvent affichés sur la page les étudiants peuvent etre modifiés et supprimer.
 
-Exécutez les étapes ci-dessous pour lancer le projet en local :
+En allant sur la page des enseignants, les admins peuvent ajouter un nouvel enseignant en lui ajoutant un nom un prenom ainsi qu'une adresse email et une date de naissance. Une fois fait les etudians ajoutés se retrouvent affichés sur la page les enseignants peuvent etre modifiés et supprimer.
 
-### 1. Cloner le dépôt
+En allant sur la page des promotions cette fois, les admins peuvent ajouter une nouvel promotion en lui ajoutant un nom une description ainsi qu'une date de début et de fin. Une fois fait les promotions ajoutées se retrouvent affichés sur la page, les promotions peuvent etre modifiés et supprimer. En cliquant sur la promotion créee l'admin peut ajouter un étudiant a une promotion ainsi que le supprimer de la promotion . Un etudiant ne peut etre associé qu'a une seule promotion.
 
-```bash
-git clone https://m_thibaud@bitbucket.org/m_thibaud/projet-web-2025.git
-cd coding-tool-box
-cp .env.example .env
-```
+Tous les utilisateurs : 
 
-### 2. Configuration de l'environnement
+En allant sur leur profile tous les utilisateurs peuvent modifier leur adresse email et supprimer leurs comptes.
 
-```bash
-✍️ Ouvrez le fichier .env et configurez les paramètres liés à votre base de données :
 
-DB_DATABASE=nom_de_votre_bdd
-DB_USERNAME=utilisateur
-DB_PASSWORD=motdepasse
-```
 
-### 3. Installation des dépendances PHP
 
-```bash
-composer install
-```
+Difficultés : 
 
-### 4. Nettoyage et optimisation du cache
-
-```bash
-php artisan optimize:clear
-```
-
-### 5. Génération de la clé d'application
-
-```bash
-php artisan key:generate
-```
-
-### 6. Migration de la base de données
-
-```bash
-php artisan migrate
-```
-
-### 7. Population de la base (Données de test)
-
-```bash
-php artisan db:seed
-```
-
----
-
-## 💻 Compilation des assets (si nécessaire)
-
-```bash
-npm install
-npm run dev
-```
-
----
-
-## 👤 Comptes de test disponibles
-
-| Rôle       | Email                         | Mot de passe |
-|------------|-------------------------------|--------------|
-| **Admin**  | admin@codingfactory.com       | 123456       |
-| Enseignant | teacher@codingfactory.com     | 123456       |
-| Étudiant   | student@codingfactory.com     | 123456       |
-
----
-
-## 🚧 Fonctionnalités principales
-
-- 🔧 Gestion des groupes, promotions, étudiants
-- 📅 Vie commune avec système de pointage
-- 📊 Bilans semestriels étudiants via QCM générés par IA
-- 🧠 Génération automatique de QCM par langage sélectionné
-- ✅ Système de Kanban pour les rétrospectives
-- 📈 Statistiques d’usage et suivi pédagogique
+Mes principales difficultés sur ce projet ont été la mise en place de l'AJAX sur les différentes pages 
