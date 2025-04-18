@@ -33,4 +33,4 @@ En allant sur leur profile tous les utilisateurs peuvent modifier leur adresse e
 
 Difficultés : 
 
-Mes principales difficultés sur ce projet ont été la mise en place de l'AJAX sur les différentes pages 
+Mes principales difficultés sur ce projet ont été la mise en place de l'AJAX sur les différentes pages, ainsi que le changement de mot de passe en utilisant l'ancien mot de passe et confirmer le mot de passe .
