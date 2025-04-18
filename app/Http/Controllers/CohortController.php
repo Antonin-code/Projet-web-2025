@@ -104,6 +104,8 @@ class CohortController extends Controller
         return response()->json(['dom' => $dom]);
     }
 
+
+    //Function to add a student from a cohort
     public function cohortAdd(Request $request , Cohort $cohort) {
 
         $userSchool = UserSchool::where('user_id', $request-> user_id)
@@ -120,6 +122,8 @@ class CohortController extends Controller
        return back();
     }
 
+
+    //Function to delete student from a cohort
     public function cohortDel($id) {
 
         $userSchool = UserSchool::where('user_id', $id)

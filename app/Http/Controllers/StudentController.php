@@ -19,6 +19,8 @@ class StudentController extends Controller
 
     }
 
+
+    //Function to store students in bdd
     public function store(Request $request)
     {
         $request->validate([

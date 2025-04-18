@@ -15,14 +15,10 @@
                 </a>
                 if you still wish to continue.
             </div>
-            <label class="checkbox-group">
-                <input class="checkbox checkbox-sm" name="delete" type="checkbox" value="1">
-                <span class="checkbox-label">Confirm deleting account</span>
-            </label>
         </div>
 
         <div class="flex justify-end gap-2.5">
-            <form action="{{ route('profile.destroy') }}" method="POST">
+            <form action="{{ route('profile.destroy') }}" method="POST" onsubmit="return confirm('Voulez vous vraiment supprimer votre compte ? ');"> {{--Delete account--}}
                 @csrf
                 @method('DELETE')
                 <button class="btn btn-danger" type="submit">

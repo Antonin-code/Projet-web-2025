@@ -58,7 +58,7 @@ Route::middleware('auth')->group(function () {
         //route to update students
         Route::put('/users/{user}', [StudentController::class, 'update'])->name('student.update');
         //Route to store students
-             Route::post('students', [StudentController::class, 'store'])->name('student.store');
+        Route::post('students', [StudentController::class, 'store'])->name('student.store');
 
 
         //Teachers
@@ -72,15 +72,17 @@ Route::middleware('auth')->group(function () {
 
         //Cohorts
         //route to update cohort
-             Route::put('/user/{user}', [CohortController ::class, 'updateCohorts'])->name('cohort.updates');
-             //route to destroy cohorts
+        Route::put('/user/{user}', [CohortController ::class, 'updateCohorts'])->name('cohort.updates');
+        //route to destroy cohorts
         Route::post('cohort/{cohort}', [CohortController ::class, 'deleteCohorts'])->name('cohort.destroy');
         //Route to store cohort
         Route::post('cohort', [CohortController ::class, 'store'])->name('cohort.store');
         //Route to view cohort form
-             Route::get('/cohort/form', [CohortController::class, 'form'])->name('cohort.form');
-             Route::post('/cohort/{cohort}/add', [CohortController::class, 'cohortAdd'])->name('cohort.add');
-             Route::post('/cohort/{id}/del', [CohortController::class, 'cohortDel'])->name('cohort.del');
+        Route::get('/cohort/form', [CohortController::class, 'form'])->name('cohort.form');
+        //Route to add a student in cohort
+        Route::post('/cohort/{cohort}/add', [CohortController::class, 'cohortAdd'])->name('cohort.add');
+        //Route to delete a student from a cohort
+        Route::post('/cohort/{id}/del', [CohortController::class, 'cohortDel'])->name('cohort.del');
 
 
          });

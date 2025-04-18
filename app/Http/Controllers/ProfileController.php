@@ -27,6 +27,9 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        $pass = [];
+        $user = $request->user();
+
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
@@ -35,6 +38,17 @@ class ProfileController extends Controller
 
         if ($request->user()->isDirty('password')) {
             $request->user()->email_verified_at = null;
+        }
+
+        //password validation
+        if ($request->filled('password') || $request->filled('current_password') ||  $request->filled('password_confirmation')) {
+        $pass['current_password'] = ['required', 'current_password'];
+        $pass['password'] = ['required', 'string', 'confirmed'];
+    }
+
+        // Update password
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
         }
 
         $request->user()->save();
