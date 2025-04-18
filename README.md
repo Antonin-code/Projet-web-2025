@@ -20,12 +20,13 @@
   - Modifier / Supprimer un enseignant *(AJAX partiellement implémenté)*
 - **Gestion des promotions**
   - Ajouter une promotion (nom, description, date de début et fin)
-  - Modifier / Supprimer une promotion *(AJAX partiellement implémenté)*
+  -  Supprimer une promotion *(AJAX partiellement implémenté)*
   - Associer un étudiant à une promotion *(1 étudiant = 1 promotion max)*
   - Supprimer un étudiant d’une promotion
 
 ### 👥 Tous les utilisateurs
 
+- Recoit le mot de passe dans les logs de laravel pour sa premiere connexion (Pour simplifier l acces et les tests l'adresse email est le mot de passe par défaut)
 - Modifier leur **adresse email**
 - Supprimer leur **compte**
 - ⚠️ Changement de mot de passe **en cours**
