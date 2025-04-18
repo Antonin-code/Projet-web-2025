@@ -26,7 +26,7 @@ En allant sur la page des promotions cette fois, les admins peuvent ajouter une 
 
 Tous les utilisateurs : 
 
-En allant sur leur profile tous les utilisateurs peuvent modifier leur adresse email et supprimer leurs comptes.
+En allant sur leur profile tous les utilisateurs peuvent modifier leur adresse email et supprimer leurs comptes (Presque réussi a modifier le mot de passe).
 
 
 
