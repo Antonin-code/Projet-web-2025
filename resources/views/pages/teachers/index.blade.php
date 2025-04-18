@@ -46,6 +46,7 @@
                                         </th>
                                     </tr>
                                     </thead>
+                                    {{--  show teachers  --}}
                                     <tbody id="viewFormTeacher">
                                     @foreach ($teachers as $teacher)
                                         @include('pages.teachers.teacher-row')
@@ -116,6 +117,7 @@
         }
 
     </script>
+    {{--Javascript for AJAX to add  a teacher without refreshing the page --}}
     <script src="{{ asset('js/jquery.js') }}" type ="text/javascript" > </script>
     <script type ="module">
         $("#formTeacher").on("submit",function(event) {

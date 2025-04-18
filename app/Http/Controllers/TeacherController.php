@@ -21,7 +21,7 @@ class TeacherController extends Controller
 
     }
 
-    //Function so store teachers
+    //Function so store teachers in database
     public function store(Request $request)
     {
         $request->validate([
@@ -50,7 +50,7 @@ class TeacherController extends Controller
     public function deleteTeachers(User $teacher)
     {
         $teacher->delete();
-        return redirect('teachers')->with('Le professeur a bien été supprimé');
+        return redirect('teachers')->with('Le professeur a bien été supprimé'); //redirect after delete
     }
 
     //function to update users

@@ -22,11 +22,10 @@ class ProfileController extends Controller
         ]);
     }
 
-    /**
-     * Update the user's profile information.
-     */
+    //Fonction to update email and password of profile (here password dont work)
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        //pass == empty tab
         $pass = [];
         $user = $request->user();
 
@@ -42,8 +41,9 @@ class ProfileController extends Controller
 
         //password validation
         if ($request->filled('password') || $request->filled('current_password') ||  $request->filled('password_confirmation')) {
-        $pass['current_password'] = ['required', 'current_password'];
-        $pass['password'] = ['required', 'string', 'confirmed'];
+        $pass['current_password'] = ['required', 'current_password']; // Validate that the current password field is filled in and that it matches the authenticated user's actual current password
+            $pass['password'] = ['required', 'string', 'confirmed'];// Validate that the new password is required, is a string, and matches the password confirmation field (usually named 'password_confirmation')
+
     }
 
         // Update password
@@ -66,7 +66,7 @@ class ProfileController extends Controller
 
         Auth::logout();
 
-        $user->delete();
+        $user->delete(); //deleting user here
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
@@ -74,24 +74,25 @@ class ProfileController extends Controller
         return Redirect::to('/');
     }
 
+   //function to update the profile photo (Dont work here)
     public function updatePP(Request $request): RedirectResponse
     {
         $request->validate([
-            'profile_picture' => ['nullable', 'image', 'max:2048'], // max 2MB
+            'profile_picture' => ['nullable', 'image', 'max:2048'],
         ]);
 
         $user = $request->user();
 
         if ($request->hasFile('profile_picture')) {
-            // Supprimer l'ancienne photo si elle existe
+            // delete old picture if already existing
             if ($user->profile_picture) {
                 Storage::disk('public')->delete($user->profile_picture);
             }
 
-            // Stocker la nouvelle photo
+            // stock the new photo
             $path = $request->file('profile_picture')->store('profile_pictures', 'public');
             $user->profile_picture = $path;
-            $user->save();
+            $user->save(); //save modifications
         }
 
         return Redirect::route('profile.edit')->with('status', 'profile-picture-updated');

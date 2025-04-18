@@ -55,6 +55,7 @@
                                         </th>
                                     </tr>
                                     </thead>
+                                    {{--  show students  --}}
                                     <tbody id="viewFormStudent">
                                         @foreach ($students as $student)
                                             @include('pages.students.student-row')
@@ -123,6 +124,7 @@
                 document.getElementById('student-modal').classList.remove('hidden');
             }
         </script>
+    {{--Javascript for AJAX to add  a student without refreshing the page --}}
     <script src="{{ asset('js/jquery.js') }}" type ="text/javascript" > </script>
     <script type ="module">
        $("#formStudent").on("submit",function(event) {

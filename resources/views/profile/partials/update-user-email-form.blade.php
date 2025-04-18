@@ -4,6 +4,7 @@
             Email
         </h3>
     </div>
+    {{--Update email of account--}}
     <form method="POST" action="{{ route('profile.update') }}">
         @csrf
         @method('PATCH')

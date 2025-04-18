@@ -75,7 +75,7 @@
                                                         <td>{{ $cohort->start_date}}</td>
                                                         <td>{{ $cohort->end_date }}</td>
                                                         <td>
-                                                            <form action="{{ route('cohort.destroy', $cohort) }}" method="POST" onsubmit="return confirm('Supprimer cette promotion ?');">                                                                    @csrf
+                                                            <form action="{{ route('cohort.destroy', $cohort) }}" method="POST" onsubmit="return confirm('Supprimer cette promotion ?');">                                                                @csrf
                                                                 @csrf
                                                                 <button type="submit" style="color: red;">Supprimer</button>
                                                             </form>

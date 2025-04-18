@@ -91,6 +91,8 @@ class User extends Authenticatable
                         ->select('users.*')
                         ->get();
     }
+
+    // This means that an instance of this model can be associated with multiple records in the 'users_schools' table
     public function userschool()
     {
         return $this->hasMany(UserSchool::class);

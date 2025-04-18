@@ -32,16 +32,18 @@ class CohortController extends Controller
      */
     public function show(Cohort $cohort)
     {
-
+        // Retrieve all users who are linked to the given cohort (promotion)
         $students = User::whereHas('userschool', function ($query) use ($cohort) {
             $query ->where('cohort_id', $cohort->id);
         })->get();
 
-
+        // Retrieve all users who have the 'student' role in the 'users_schools' pivot table
         $Users = User ::whereHas('UserSchool', function ($query) {
+            // Filter users where the pivot column 'role' is equal to 'student'
             $query -> where('users_schools.role', 'student');
         }) -> get();
 
+        //return view
         return view('pages.cohorts.show', [
             'cohort' => $cohort, 'users' => $Users , 'students' => $students
         ]);
@@ -69,9 +71,9 @@ class CohortController extends Controller
     //Function to delete cohorts
     public function deleteCohorts(Cohort $cohort)
     {
-        $cohort->delete();
+        $cohort->delete(); //delete cohort here
         $cohorts = Cohort::all();
-        return view('pages.cohorts.index',[
+        return view('pages.cohorts.index',[  //return view
             'cohorts' => $cohorts
         ]);
     }

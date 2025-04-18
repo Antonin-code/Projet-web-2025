@@ -49,7 +49,7 @@ class StudentController extends Controller
     public function deleteStudents(User $student)
     {
         $student->delete();
-        return redirect('students')->with('L etudiant a bien été supprimé');
+        return redirect('students')->with('L etudiant a bien été supprimé'); //redirect after delete
     }
 
     //function to update users
