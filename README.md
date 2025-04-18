@@ -1,36 +1,81 @@
-# 🚀 Coding Tool Box – Guide d'installation
+# 🎓 Coding Tool Box
 
-Bienvenue dans **Coding Tool Box**, un outil complet de gestion pédagogique conçu pour la Coding Factory.  
-Ce projet Laravel inclut la gestion des enseignats, des etudiants ainsi que des promotions. 
+**Coding Tool Box** est un outil de gestion pédagogique complet conçu pour la [Coding Factory](https://codingfactory.fr). Développé avec **Laravel**, il permet aux administrateurs de gérer efficacement les enseignants, les étudiants et les promotions.
 
-Avancée des storys : 
+---
 
-Us 1 : La story a été entièrement faite 
-Us 2 : Manque de temps la story n'a pas été commencée 
-Us 3 : Story entièrement faite avec AJAX lorsque l'admin enregistre un étudiant mais je n'ai pas réussi a mettre l'AJAX sur les boutons modifier et supprimer.
-Us 4 : Story entièrement faite avec AJAX lorsque l'admin enregistre une promotion mais je n'ai pas réussi a modifier la promotion ainsi qu'a mettre l'AJAX sur le bouton  supprimer lors de l'ajout de la promotion.
-Us 5 : Story entièrement faite avec AJAX lorsque l'admin enregistre un enseignant mais je n'ai pas réussi a mettre l'AJAX sur les boutons modifier et supprimer.
-Us 6 : Story commencée : l'utilisateur peut modifier son adresse email et supprimer son compte. Pour l'instsant celui ci ne peut pas changer sa photo de profil ni son mot de passe. 
+## 🚀 Fonctionnalités principales
 
+### 👩‍🏫 Admins
 
-Description du projet :
+- Accès à un **dashboard principal** affichant le nombre total :
+  - d'étudiants
+  - d'enseignants
+  - de promotions
+- **Gestion des étudiants**
+  - Ajouter un étudiant (nom, prénom, email, date de naissance)
+  - Modifier / Supprimer un étudiant *(AJAX partiellement implémenté)*
+- **Gestion des enseignants**
+  - Ajouter un enseignant (nom, prénom, email, date de naissance)
+  - Modifier / Supprimer un enseignant *(AJAX partiellement implémenté)*
+- **Gestion des promotions**
+  - Ajouter une promotion (nom, description, date de début et fin)
+  - Modifier / Supprimer une promotion *(AJAX partiellement implémenté)*
+  - Associer un étudiant à une promotion *(1 étudiant = 1 promotion max)*
+  - Supprimer un étudiant d’une promotion
 
-Admins : 
-Pour les utilisateurs connectés en tant qu'admins, ceux-ci arrivent dans un premier temps sur la page principale où ils peuvent voir le nombre d'etudiants d'enseignants ansi que de promotions.
+### 👥 Tous les utilisateurs
 
-En allant sur la page des étudiants, les admins peuvent ajouter un nouvel etudiant en lui ajoutant un nom un prenom ainsi qu'une adresse email et une date de naissance. Une fois fait les etudians ajoutés se retrouvent affichés sur la page les étudiants peuvent etre modifiés et supprimer.
+- Modifier leur **adresse email**
+- Supprimer leur **compte**
+- ⚠️ Changement de mot de passe **en cours**
+- ⚠️ Changement de photo de profil **non disponible actuellement**
 
-En allant sur la page des enseignants, les admins peuvent ajouter un nouvel enseignant en lui ajoutant un nom un prenom ainsi qu'une adresse email et une date de naissance. Une fois fait les etudians ajoutés se retrouvent affichés sur la page les enseignants peuvent etre modifiés et supprimer.
+---
 
-En allant sur la page des promotions cette fois, les admins peuvent ajouter une nouvel promotion en lui ajoutant un nom une description ainsi qu'une date de début et de fin. Une fois fait les promotions ajoutées se retrouvent affichés sur la page, les promotions peuvent etre modifiés et supprimer. En cliquant sur la promotion créee l'admin peut ajouter un étudiant a une promotion ainsi que le supprimer de la promotion . Un etudiant ne peut etre associé qu'a une seule promotion.
+## 📌 Avancement des User Stories
 
-Tous les utilisateurs : 
+| User Story | Statut | Remarques |
+|------------|--------|-----------|
+| **US 1** | ✅ Terminée | - |
+| **US 2** | ❌ Non commencée | Manque de temps | 
+| **US 3** | ✅ Terminée  | AJAX fonctionne à l'ajout, mais pas sur modifier / supprimer |
+| **US 4** | ✅ Terminée | AJAX à l'ajout uniquement, pas sur modifier / supprimer |
+| **US 5** | ✅ Terminée | AJAX à l'ajout uniquement, pas sur modifier / supprimer |
+| **US 6** | ⚠️ En cours | Email et suppression OK, mot de passe presque fini et photo à faire |
 
-En allant sur leur profile tous les utilisateurs peuvent modifier leur adresse email et supprimer leurs comptes (Presque réussi a modifier le mot de passe).
+---
 
+## 🛠️ Difficultés rencontrées
 
+- Mise en place de **l’AJAX** (notamment sur les boutons modifier et supprimer)
+- Gestion du **changement de mot de passe** :
+  - Vérification de l’ancien mot de passe
+  - Confirmation du nouveau mot de passe
+  -Modification photo de profile
+---
 
+## 📚 Technologies utilisées
 
-Difficultés : 
+- **Laravel** (Framework PHP)
+- **AJAX / jQuery**
+- **MySQL**
+- **Blade** (Moteur de template Laravel)
 
-Mes principales difficultés sur ce projet ont été la mise en place de l'AJAX sur les différentes pages, ainsi que le changement de mot de passe en utilisant l'ancien mot de passe et confirmer le mot de passe .
+---
+
+## 💡 Prochaines améliorations
+
+- [ ] Finaliser les actions AJAX (modifier / supprimer)
+- [ ] Ajout du changement de mot de passe complet
+- [ ] Possibilité de changer la photo de profil
+- [ ] Amélioration de l’interface utilisateur (UI/UX)
+
+---
+
+## 📩 Contact
+
+*Développé avec ❤️ par un Antonin passionné de la Coding Factory.*
+
+---
+
